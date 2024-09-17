@@ -1,48 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/16 17:14:35 by tklaus            #+#    #+#             */
-/*   Updated: 2024/09/17 12:15:17 by tklaus           ###   ########.fr       */
+/*   Created: 2024/09/17 16:26:59 by tklaus            #+#    #+#             */
+/*   Updated: 2024/09/17 16:34:22 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
+	unsigned char	*ptr;
 	size_t			i;
-	unsigned char	*ptrdest;
-	unsigned char	*ptrsrc;
 
+	ptr = (unsigned char *)s;
 	i = 0;
-	ptrdest = (unsigned char *)dest;
-	ptrsrc = (unsigned char *)src;
 	while (i < n)
 	{
-		ptrdest[i] = ptrsrc[i];
+		if (*ptr == c)
+		{
+			return (ptr);
+		}
+		ptr++;
 		i++;
 	}
-    return dest;
+	return (0);
 }
-/* 
+
+/*
 #include <stdio.h>
 #include <string.h>
 
-struct Point {
-    int x, y;
-};
-
-int main() {
-    struct Point p1 = {10, 20};
-    struct Point p2;
-
-    // Copy struct data from p1 to p2
-    ft_memcpy(&p2, &p1, sizeof(struct Point));
-
-    printf("p2.x = %d, p2.y = %d\n", p2.x, p2.y);
-    return 0;
-} */
+int	main(void) {
+	const char data[] = { 'H', 'e', 'l', 'l', 'o', 0, 'W', 'o', 'r', 'l', 'd' };
+	char *result = ft_memchr(data, 'o', sizeof(data));
+	if (result) {
+		printf("First occurrence of 'o' found at position: %ld\n", result
+			- data);
+	} else {
+		printf("'o' not found\n");
+	}
+	return (0);
+}
+ */
