@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 15:36:38 by tklaus            #+#    #+#             */
-/*   Updated: 2024/09/17 16:08:49 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/09/23 15:40:24 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strrchr(const char *s, int c)
 		return ((char *)og);
 	return (ptr);
 }
-
+/* 
 #include <stdio.h>
 #include <string.h>
 
@@ -59,4 +59,4 @@ int	main(void)
     printf ("%s\n", str);
 
 	return (0);
-}
+} */

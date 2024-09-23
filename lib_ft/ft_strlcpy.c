@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:24:04 by tklaus            #+#    #+#             */
-/*   Updated: 2024/09/17 13:36:07 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/09/23 15:39:54 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ size_t	ft_strlcpy(char *dst, char *src, size_t size)
 	return (i);
 }
 
-#include <stdio.h>
+/* #include <stdio.h>
 int	main(void)
 {
 	char dst[5];
@@ -51,4 +51,4 @@ int	main(void)
 
 	printf("%s\n", dst);
 	return (0);
-}
+} */

@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:50:29 by tklaus            #+#    #+#             */
-/*   Updated: 2024/09/17 16:08:21 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/09/23 15:40:12 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strchr(const char *s, int c)
 	}
 	return (0);
 }
-#include <stdio.h>
+/* #include <stdio.h>
 #include <string.h>
 
 int	main(void)
@@ -58,4 +58,4 @@ int	main(void)
 	printf("%s\n", str);
 
 	return (0);
-}
+} */

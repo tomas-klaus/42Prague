@@ -3,8 +3,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 # Source files.
-#SRC_FILES = $(wildcard *.c)
-SRC_FILES = ft_isalpha.c #DOPLNIT!!!!!!!!!!!!!!!!!!!
+SRC_FILES = $(wildcard *.c)
+#SRC_FILES = ft_strtrim.c #DOPLNIT!!!!!!!!!!!!!!!!!!!
 
 # Object files.
 OBJ_FILES = $(patsubst %.c,%.o,$(SRC_FILES))
@@ -13,12 +13,12 @@ OBJ_FILES = $(patsubst %.c,%.o,$(SRC_FILES))
 DEP_FILES = $(patsubst %.c,%.d,$(SRC_FILES))
 
 # Name of the resulting binary file.
-BIN = libft.a
+NAME = libft.a
 
 # Targets.
-all: $(BIN)
+all: $(NAME)
 
-$(BIN): $(OBJ_FILES)
+$(NAME): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $^ -o $@
 
 %.o: %.c
@@ -32,4 +32,4 @@ clean:
 
 .PHONY: fclean
 fclean: clean
-	rm -f $(BIN)
+	rm -f $(NAME)
