@@ -33,3 +33,5 @@ clean:
 .PHONY: fclean
 fclean: clean
 	rm -f $(NAME)
+
+re: fclean all
