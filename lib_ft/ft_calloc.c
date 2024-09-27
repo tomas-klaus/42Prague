@@ -6,10 +6,11 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 11:40:47 by tklaus            #+#    #+#             */
-/*   Updated: 2024/09/23 12:05:09 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/09/26 15:27:59 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include <stdlib.h>
 
 void	*ft_calloc(size_t nmemb, size_t size)
@@ -23,30 +24,20 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	ptr = malloc(result);
 	if (!ptr)
 		return (NULL);
+	ft_memset(ptr, 0, result);
 	return (ptr);
 }
-/* #include <stdio.h>
+/*
+#include <stdio.h>
 #include <stdlib.h>
-int main() {
-   int n = 5;
-   int *array;
-   
-   // use calloc function to allocate the memory
-   array = (int*)ft_calloc(n, sizeof(int));
-   
-   if (array == NULL) {
-      fprintf(stderr, "Memory allocation failed!\n");
-      return 1;
-   }
-   
-   //Display the array value
-   printf("Array elements after ft_calloc: ");
-   for (int i = 0; i < n; i++) {
-      printf("%d ", array[i]);
-   }
-   printf("\n");
-   
-   //free the allocated memory
-   free(array);
-   return 0;
+#include <unistd.h>
+
+int	main(void) {
+   char *str;
+   str = (char *)ft_calloc(30, 1);
+	if (!str)
+		write(1, "NULL", 4);
+	else
+		write(1, str, 30);
+   free(str);
 } */

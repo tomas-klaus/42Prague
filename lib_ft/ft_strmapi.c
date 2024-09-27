@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 12:45:52 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/09/25 13:06:31 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2024/09/27 16:52:50 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-
-int	ft_strlen(char *str)
-{
-	int	length;
-
-	length = 0;
-	while (str[length] != '\0')
-	{
-		length++;
-	}
-	return (length);
-}
+#include "libft.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
@@ -31,7 +18,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	int		i;
 	char	*c;
 
-	len = ft_strlen((char *)s);
+	len = ft_strlen(s);
 	i = 0;
 	c = malloc((len + 1) * sizeof(char));
 	if (!c)
@@ -44,7 +31,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	c[i] = '\0';
 	return (c);
 }
-/* 
+/*
 char	modify_char(unsigned int i, char c)
 {
 	return (c + i - i + 1);

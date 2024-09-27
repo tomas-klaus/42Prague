@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:13:28 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/09/25 21:43:22 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2024/09/27 17:38:43 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ void	ft_putstr_fd(char *s, int fd)
 		i++;
 	}
 }
-/* 
+/*
 int	main(void)
 {
-	int		fd;
-	char	c[] = "hello";
+	int	fd;
 
 	fd = 1;
-	ft_putstr_fd(c, fd);
+	ft_putstr_fd("\nend!", fd);
 	return (0);
 }
  */

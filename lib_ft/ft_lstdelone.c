@@ -1,45 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/17 13:50:29 by tklaus            #+#    #+#             */
-/*   Updated: 2024/09/27 17:09:23 by tklaus           ###   ########.fr       */
+/*   Created: 2024/09/27 12:19:56 by tklaus            #+#    #+#             */
+/*   Updated: 2024/09/27 13:01:33 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+/* void	del(void *content)
 {
-	const char	*og = s;
-	size_t		i;
-	size_t		len;
-
-	i = 0;
-	len = ft_strlen(s);
-	while (i <= len)
-	{
-		if (*og == (char)c)
-		{
-			return ((char *)og);
-		}
-		og++;
-		i++;
-	}
-	return (0);
-}
-/* 
-#include <stdio.h>
-#include <string.h>
-
-int	main(void)
-{
-	char *last_occurrence = ft_strchr("teste", '\0');
-
-	printf("%p\n", last_occurrence);
-
-	return (0);
+	free(content);
 } */
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
+{
+	if (!lst || !del)
+		return ;
+	del(lst->content);
+	free(lst);
+}

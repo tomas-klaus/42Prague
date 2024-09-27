@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 10:06:23 by tklaus            #+#    #+#             */
-/*   Updated: 2024/09/23 10:35:46 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/09/26 12:02:26 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	unsigned char	*ptr1;
 	unsigned char	*ptr2;
-	size_t				i;
+	size_t			i;
 
 	ptr1 = (unsigned char *)s1;
 	ptr2 = (unsigned char *)s2;
@@ -31,23 +31,23 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-/* 
+/*
 #include <stdio.h>
 #include <string.h>
 
-int main() {
+int	main(void) {
    char str1[] = "12345678901400345678";
    char str2[] = "1234567";
 
    int result = ft_memcmp(str1, str2, 10);
 
    if (result < 0) {
-       printf("First is less than second.\n");
+		printf("First is less than second.\n");
    } else if (result == 0) {
-       printf("First is equal to second.\n");
+		printf("First is equal to second.\n");
    } else {
-       printf("First is greater than second.\n");
+		printf("First is greater than second.\n");
    }
-    return 0;
+	return (0);
 }
  */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 21:40:45 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/09/25 21:47:33 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2024/09/26 11:53:53 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	ft_putnbr_fd(int n, int fd)
 		write(fd, &c, 1);
 	}
 }
-
+/* 
 int	main(void)
 {
 	int nb = -2398410;
 	ft_putnbr_fd(nb, 1);
 	return (0);
-}
+} */

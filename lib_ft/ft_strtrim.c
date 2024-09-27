@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 14:12:43 by tklaus            #+#    #+#             */
-/*   Updated: 2024/09/23 17:39:53 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/09/27 16:53:26 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,37 +33,34 @@ char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		fromstart;
 	int		fromend;
-	int		i;
 	int		len;
-	int		j;
-	char	*string;
+	char	*trimmed_string;
+	int		trimmed_len;
 
 	fromstart = 0;
 	fromend = 0;
-	i = 0;
-	len = ft_strlen((char *)s1) - 1;
-	j = len;
-	while (isset(set, s1[i]))
-	{
+	if (!s1)
+		return (NULL);
+	len = ft_strlen(s1) - 1;
+	while (isset(set, s1[fromstart]))
 		fromstart++;
-		i++;
-	}
-	while (isset(set, s1[j]))
-	{
-		fromend++;
-		j--;
-	}
-	string = ft_substr(s1, fromstart, (len - (fromstart + fromend)));
-	return (string);
+	while (isset(set, s1[len]) && len > fromstart)
+		len--;
+	trimmed_len = len - fromstart + 1;
+	trimmed_string = malloc((trimmed_len + 1) * sizeof(char));
+	if (!trimmed_string)
+		return (NULL);
+	ft_memcpy(trimmed_string, s1 + fromstart, trimmed_len);
+	trimmed_string[trimmed_len] = '\0';
+	return (trimmed_string);
 }
-/* 
+/*
 #include <stdio.h>
 
 int	main(void)
 {
-	char const set[] = " +-";
-	char const s1[] = "hel-lo";
-	char *result = ft_strtrim(s1, set);
+	char *result = ft_strtrim("   \t  \n\n \t\t  \n\n\nHello
+	\t  Please\n Trim me !\n   \n \n \t\t\n  "," \n\t");
 
 	printf("%s", result);
 } */
