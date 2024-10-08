@@ -1,0 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_ft_printf                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/08 14:00:00 by tklaus            #+#    #+#             */
+/*   Updated: 2024/10/08 14:15:54 by tklaus           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+#include <stdio.h>
+#include <string.h>
+
+void	test_ft_printf(void)
+{
+	char	buffer[100];
+	int		ret;
+
+	// Test 1: Integer
+	ret = snprintf(buffer, sizeof(buffer), "Number: %d\n", 42);
+	if (ft_printf("Number: %d\n", 42) != ret)
+		printf("Test 1 failed\n");
+	else
+		printf("Test 1 passed\n");
+	// Test 2: String
+	ret = snprintf(buffer, sizeof(buffer), "Hello, %s!\n", "world");
+	if (ft_printf("Hello, %s!\n", "world") != ret)
+		printf("Test 2 failed\n");
+	else
+		printf("Test 2 passed\n");
+	// Test 3: Character
+	ret = snprintf(buffer, sizeof(buffer), "Character: %c\n", 'A');
+	if (ft_printf("Character: %c\n", 'A') != ret)
+		printf("Test 3 failed\n");
+	else
+		printf("Test 3 passed\n");
+	// Test 4: Unsigned Integer
+	ret = snprintf(buffer, sizeof(buffer), "Unsigned: %u\n", 42);
+	if (ft_printf("Unsigned: %u\n", 42) != ret)
+		printf("Test 4 failed\n");
+	else
+		printf("Test 4 passed\n");
+	// Test 5: Hexadecimal
+	ret = snprintf(buffer, sizeof(buffer), "Hex: %x\n", 42);
+	if (ft_printf("Hex: %x\n", 42) != ret)
+		printf("Test 5 failed\n");
+	else
+		printf("Test 5 passed\n");
+	// Test 6: Percent Sign
+	ret = snprintf(buffer, sizeof(buffer), "Percent: %%\n");
+	if (ft_printf("Percent: %%\n") != ret)
+		printf("Test 6 failed\n");
+	else
+		printf("Test 6 passed\n");
+}
+
+int	main(void)
+{
+	test_ft_printf();
+	return (0);
+}
