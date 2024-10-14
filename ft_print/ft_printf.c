@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:39:05 by tklaus            #+#    #+#             */
-/*   Updated: 2024/10/08 14:23:53 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/10/14 18:08:12 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
  */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 int	format_check(char specifier, va_list args)
 {
@@ -64,8 +65,6 @@ int	parse_args(const char *str, va_list args, int count)
 		{
 			i++;
 			j = format_check(str[i], args);
-			if (!j)
-				return (0);
 			count += j;
 		}
 		else
@@ -87,37 +86,18 @@ int	ft_printf(const char *str, ...)
 	return (count);
 }
 
-/* #include <stdio.h>
+#include <stdio.h>
+#include <limits.h>
 
 int	main(void)
 {
-	ft_printf("Number: %d\n", 42);
-	printf("Number: %d\n", 42);
+	int	i;
+	int	j;
 
-	ft_printf("String: %s\n", "Hello, world!");
-	printf("String: %s\n", "Hello, world!");
-
-	ft_printf("Character: %c\n", 'A');
-	printf("Character: %c\n", 'A');
-
-	ft_printf("Unsigned: %u\n", 42);
-	printf("Unsigned: %u\n", 42);
-
-	ft_printf("Hexadecimal: %x\n", 42);
-	printf("Hexadecimal: %x\n", 42);
-
-	ft_printf("Hexadecimal: %X\n", 42);
-	printf("Hexadecimal: %X\n", 42);
-
-	ft_printf("Percent: %%\n");
-	printf("Percent: %%\n");
-
-	ft_printf("Mixed: %d %s %c %u %x %X %%\n", 42, "Hello, world!", 'A', 42, 42,
-		42);
-	printf("Mixed: %d %s %c %u %x %X %%\n", 42, "Hello, world!", 'A', 42, 42,
-		42);
-
-	ft_printf("Hello");
-	printf("Hello");
+	i = 0;
+	j = 0;
+	i = printf("printo: %p %p", LONG_MIN, LONG_MAX);
+	j = ft_printf("printf: %p %p", LONG_MIN, LONG_MAX);
+	printf("printf: %d, ft_printf: %d\n", i, j);
 	return (0);
-} */
+}

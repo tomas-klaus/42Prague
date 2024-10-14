@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:33:30 by tklaus            #+#    #+#             */
-/*   Updated: 2024/10/08 14:22:16 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/10/14 17:44:13 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	ft_putstr(char *str)
 		return (write(1, "(null)", 6));
 	while (str[i])
 		ft_putchar(str[i++]);
+	if (i == 0)
+		return (write(1, "", 0));
 	return (i);
 }
 
