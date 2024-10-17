@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:39:05 by tklaus            #+#    #+#             */
-/*   Updated: 2024/10/14 18:08:12 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/10/17 12:52:24 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 
 int	format_check(char specifier, va_list args)
 {
-	int	i;
-
 	if (specifier == 'c')
 		return (ft_putchar(va_arg(args, int)));
 	else if (specifier == 's')
@@ -40,14 +38,7 @@ int	format_check(char specifier, va_list args)
 	else if (specifier == '%')
 		return (ft_putchar('%'));
 	else if (specifier == 'p')
-	{
-		if (!specifier)
-			return (write(1, "(nil)", 5));
-		i = 2;
-		ft_putstr("0x");
-		i += ft_putnbr_base(va_arg(args, unsigned long), 'x');
-		return (i);
-	}
+		return (print_pointer(va_arg(args, unsigned long long)));
 	else
 		return (0);
 }
@@ -86,18 +77,22 @@ int	ft_printf(const char *str, ...)
 	return (count);
 }
 
-#include <stdio.h>
 #include <limits.h>
+#include <stdio.h>
 
 int	main(void)
 {
 	int	i;
 	int	j;
+	int	m;
+	int	*k;
 
+	m = 6;
+	k = &m;
 	i = 0;
 	j = 0;
-	i = printf("printo: %p %p", LONG_MIN, LONG_MAX);
-	j = ft_printf("printf: %p %p", LONG_MIN, LONG_MAX);
+	i = printf("printf: %u\n", -2);
+	j = ft_printf("ft_printf: %u\n", -2);
 	printf("printf: %d, ft_printf: %d\n", i, j);
 	return (0);
 }

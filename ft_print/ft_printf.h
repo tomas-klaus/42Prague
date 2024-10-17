@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:09:29 by tklaus            #+#    #+#             */
-/*   Updated: 2024/10/08 14:10:06 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/10/17 12:42:38 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int	ft_putstr(char *str);
 int	ft_putnbr(int n);
 int	ft_putnbr_base(unsigned int n, char specifier);
 int	ft_printf(const char *str, ...);
+int	print_pointer(unsigned long long n);
 
 #endif

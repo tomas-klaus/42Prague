@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 13:33:30 by tklaus            #+#    #+#             */
-/*   Updated: 2024/10/14 17:44:13 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/10/17 12:46:24 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ int	ft_putnbr(int n)
 	int	count;
 
 	count = 0;
+	if (n == -2147483648)
+	{
+		count += ft_putstr("-2147483648");
+		return (count);
+	}
 	if (n < 0)
 	{
 		count += ft_putchar('-');
@@ -62,4 +67,19 @@ int	ft_putnbr_base(unsigned int n, char specifier)
 		count += ft_putnbr_base(n / 16, specifier);
 	count += ft_putchar(base[n % 16]);
 	return (count);
+}
+
+int	print_pointer(unsigned long long ptr)
+{
+	int	i;
+
+	i = 0;
+	if (ptr == 0)
+		return (write(1, "(nil)", 5));
+	else
+	{
+		i += ft_putstr("0x");
+		i += ft_putnbr_base((unsigned long long)ptr, 'x');
+		return (i);
+	}
 }
