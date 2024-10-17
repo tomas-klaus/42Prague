@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:50:23 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/10/11 15:31:26 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2024/10/17 17:56:02 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,43 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		i++;
 	}
 	return (dest);
+}
+size_t	ft_strlen(const char *str)
+{
+	size_t	length;
+
+	if (!str)
+		return (0);
+	length = 0;
+	while (str[length] != '\0')
+		length++;
+	return (length);
+}
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	dst_len;
+	size_t	src_len;
+	size_t	i;
+
+	if (!dst || !src)
+		return (0);
+	dst_len = 0;
+	src_len = 0;
+	i = 0;
+	while (dst[dst_len] != '\0')
+		dst_len++;
+	while (src[src_len] != '\0')
+	{
+		src_len++;
+	}
+	if (size <= dst_len)
+		return (size + src_len);
+	while (src[i] != '\0' && dst_len + i < size - 1)
+	{
+		dst[dst_len + i] = src[i];
+		i++;
+	}
+	dst[dst_len + i] = '\0';
+	return (dst_len + src_len);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:49:32 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/10/11 15:38:03 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2024/10/17 18:10:08 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ size_t	read_one_buffer(int fd, char *buffer)
 	size_t	bytes_read;
 	size_t	i;
 
-	bytes_read = read(fd, buffer, BUFFER_SIZE-1);
+	bytes_read = read(fd, buffer, BUFFER_SIZE - 1);
 	i = 0;
-	while (i < bytes_read)
+	while (i <= bytes_read)
 	{
+		printf("buffer[%ld]: %c\n", i, buffer[i]);
 		if (buffer[i] == '\n')
 			return (i);
 		i++;
@@ -42,45 +43,55 @@ char	*get_next_line(int fd)
 	char	buffer[BUFFER_SIZE];
 	ssize_t	bytes_read;
 	char	*arr;
-    int first = 1;
+	int		first;
+	int		len;
 
+	first = 1;
 	if (fd == -1)
 		return (NULL);
 	while (1)
 	{
-        
 		bytes_read = read_one_buffer(fd, buffer);
-        printf("bytes_read: %ld\n", bytes_read);
+		printf("bytes_read: %ld\n", bytes_read);
 		if (first)
 		{
-            first = 0;
-			arr = ft_realloc_str(buffer, sizeof(buffer), bytes_read);
-            printf("sizeof(arr) in first: %ld\n", sizeof(arr));
-            printf("arr: %s\n", arr);
+			first = 0;
+			arr = malloc(BUFFER_SIZE);
+			if (!arr)
+				return (NULL);
+			ft_memcpy(arr, buffer, bytes_read);
+			arr[bytes_read+1] = '\0';
+			//arr = ft_realloc_str(buffer, BUFFER_SIZE, bytes_read);
+			printf("sizeof() in first: %ld\n", ft_strlen(arr));
+			// printf("arr: %s\n", arr);
 			if (!arr)
 				return (NULL);
 		}
 		else
 		{
-            printf("sizeof(arr): %ld\n", sizeof(arr));
-			arr = ft_realloc_str(arr, sizeof(arr), sizeof(arr) + bytes_read);
-            
+			len = ft_strlen(arr);
+			printf("1. sizeof(arr): %d\n", len);
+			arr = ft_realloc_str(arr, len, (len + bytes_read));
+			ft_strlcat(arr, buffer, len + bytes_read+1);
+			len = ft_strlen(arr);
+			printf("2. sizeof(arr): %d\n", len);
 			if (!arr)
 				return (NULL);
 		}
-		if (bytes_read != BUFFER_SIZE)
+		if (bytes_read != BUFFER_SIZE - 1)
 			return (arr);
 	}
 }
 
 #include <fcntl.h>
-int main()
-{
-    int fd;
-    char *line;
 
-    fd = open("test.txt", O_RDONLY);
-    line = get_next_line(fd);
-    printf("%s\n", line);
-    return (0);
+int	main(void)
+{
+	int fd;
+	char *line;
+
+	fd = open("test.txt", O_RDONLY);
+	line = get_next_line(fd);
+	printf("%s\n", line);
+	return (0);
 }

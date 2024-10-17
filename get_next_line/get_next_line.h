@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:50:20 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/10/11 15:13:03 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2024/10/17 17:50:02 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	*ft_realloc_str(char *str, unsigned int old_buff_size,
 			unsigned int new_buff_size);
 
 size_t	read_one_buffer(int fd, char *buffer);
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
 # endif
 #endif
