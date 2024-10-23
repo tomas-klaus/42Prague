@@ -3,7 +3,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 # Source files.
-SRC_FILES = $(wildcard *.c)
+SRC_FILES = ft_printf.c put_things.c put_things2.c
 
 
 # Object files.
