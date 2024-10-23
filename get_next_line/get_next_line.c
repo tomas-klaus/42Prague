@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:49:32 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/10/17 18:10:08 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/10/23 13:08:19 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ size_t	read_one_buffer(int fd, char *buffer)
 	i = 0;
 	while (i <= bytes_read)
 	{
-		printf("buffer[%ld]: %c\n", i, buffer[i]);
+		// printf("buffer[%ld]: %c\n", i, buffer[i]);
 		if (buffer[i] == '\n')
 			return (i);
 		i++;
@@ -52,7 +52,7 @@ char	*get_next_line(int fd)
 	while (1)
 	{
 		bytes_read = read_one_buffer(fd, buffer);
-		printf("bytes_read: %ld\n", bytes_read);
+		// printf("bytes_read: %ld\n", bytes_read);
 		if (first)
 		{
 			first = 0;
@@ -60,9 +60,9 @@ char	*get_next_line(int fd)
 			if (!arr)
 				return (NULL);
 			ft_memcpy(arr, buffer, bytes_read);
-			arr[bytes_read+1] = '\0';
-			//arr = ft_realloc_str(buffer, BUFFER_SIZE, bytes_read);
-			printf("sizeof() in first: %ld\n", ft_strlen(arr));
+			arr[bytes_read + 1] = '\0';
+			// arr = ft_realloc_str(buffer, BUFFER_SIZE, bytes_read);
+			// printf("sizeof() in first: %ld\n", ft_strlen(arr));
 			// printf("arr: %s\n", arr);
 			if (!arr)
 				return (NULL);
@@ -70,11 +70,11 @@ char	*get_next_line(int fd)
 		else
 		{
 			len = ft_strlen(arr);
-			printf("1. sizeof(arr): %d\n", len);
+			// printf("1. sizeof(arr): %d\n", len);
 			arr = ft_realloc_str(arr, len, (len + bytes_read));
-			ft_strlcat(arr, buffer, len + bytes_read+1);
+			ft_strlcat(arr, buffer, len + bytes_read + 1);
 			len = ft_strlen(arr);
-			printf("2. sizeof(arr): %d\n", len);
+			// printf("2. sizeof(arr): %d\n", len);
 			if (!arr)
 				return (NULL);
 		}
@@ -91,6 +91,9 @@ int	main(void)
 	char *line;
 
 	fd = open("test.txt", O_RDONLY);
+	line = get_next_line(fd);
+
+	printf("%s\n", line);
 	line = get_next_line(fd);
 	printf("%s\n", line);
 	return (0);
