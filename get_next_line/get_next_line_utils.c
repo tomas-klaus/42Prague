@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 12:50:23 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/10/17 17:56:02 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/11/13 11:54:51 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,25 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	}
 	dst[dst_len + i] = '\0';
 	return (dst_len + src_len);
+}
+
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	unsigned char	*ptr;
+	size_t			i;
+
+	if (!s)
+		return (0);
+	ptr = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		if (*ptr == (unsigned char)c)
+		{
+			return (ptr);
+		}
+		ptr++;
+		i++;
+	}
+	return (0);
 }
