@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:17:20 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/11/13 12:50:00 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2024/11/13 16:54:21 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char const *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*joined_str;
 	size_t	i;
@@ -81,7 +81,7 @@ char	*ft_strjoin(char const *s1, char *s2)
 		j++;
 	}
 	joined_str[i + j] = '\0';
-	//free(s2);
+	free(s1);
 	return (joined_str);
 }
 
