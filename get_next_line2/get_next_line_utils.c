@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:17:20 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/11/13 16:54:21 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/11/21 11:01:23 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*ft_calloc(size_t count, size_t size)
 		result = 1;
 	ptr = malloc(result);
 	if (!ptr)
-		return (NULL);
+		return (ptr=NULL, NULL);
 	p = ptr;
 	while (i < result)
 	{
@@ -63,11 +63,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	i;
 	size_t	j;
 
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1)
+		return (free(s1), free(s2), s1=NULL, NULL);
 	joined_str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!joined_str)
-		return (NULL);
+		return (free(s1), free(s2), s1=NULL, NULL);
 	i = 0;
 	while (s1[i])
 	{

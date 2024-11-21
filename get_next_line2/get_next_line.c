@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:17:12 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/11/14 11:44:13 by tklaus           ###   ########.fr       */
+/*   Updated: 2024/11/21 11:09:25 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,21 @@ char	*get_next(char *buffer)
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (!buffer[i])
-	{
-		free(buffer);
-		return (NULL);
-	}
+		return (free(buffer), buffer = NULL, NULL); //end of file, exit
 	new_buffer = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(char));
 	if (!new_buffer)
-		return (NULL);
+		return (free(buffer), buffer = NULL, NULL);
 	i++;
 	while (buffer[i])
 		new_buffer[j++] = buffer[i++];
 	new_buffer[j] = '\0';
-	free(buffer);
-	return (new_buffer);
+	return (free(buffer), buffer = NULL, new_buffer);
 }
 
 /* 	Locates the '\n' character in buffer and copies only characters
-	before and including it into a new buffer line */
+	before and including it into a new buffer line
+	If there is no '\n', it copies the whole buffer into line.
+	*/
 
 char	*extract_line(char *buffer)
 {
@@ -51,12 +49,14 @@ char	*extract_line(char *buffer)
 
 	i = 0;
 	if (!buffer[i])
-		return (NULL);
+		return (free(buffer), buffer=NULL, NULL); //empty buffer, end program
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	line = ft_calloc(i + 2, sizeof(char));
+	if (buffer[i] == '\n')
+		i++;
+	line = ft_calloc(i + 1, sizeof(char));
 	if (!line)
-		return (NULL);
+		return (free(buffer), buffer = NULL, NULL); //malloc fail, exit
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 	{
@@ -64,40 +64,45 @@ char	*extract_line(char *buffer)
 		i++;
 	}
 	if (buffer[i] && buffer[i] == '\n')
-		line[i++] = '\n';
+	{
+		line[i] = '\n';
+		i++;
+	}
+	line[i] = '\0';
 	return (line);
 }
 
-/* 	Reads the file by small BUFFER_SIZE chunks and adds them to the full.
+/* 	Reads the file by small BUFFER_SIZE chunks and adds them to the static_buffer.
 	When the '\n' character is located, it breaks the loop, frees
-	the buffer and returns full */
+	the chunk_buffer and returns static_buffer */
 
-char	*read_to_buffer(int fd, char *full)
+char	*read_to_buffer(int fd, char *static_buffer)
 {
-	char	*buffer;
+	char	*chunk_buffer;
 	int		bytes_read;
 
-	bytes_read = 1;
-	if (!full)
-		full = ft_calloc(1, 1);
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
-	if (!buffer)
-		return (NULL);
-	while (bytes_read > 0)
+	if (!static_buffer)
+		static_buffer = ft_calloc(1, 1);
+	if (!static_buffer)
+		return (NULL); //malloc fail, exit
+	chunk_buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	if (!chunk_buffer)
+		return (free(static_buffer), static_buffer = NULL, NULL); //malloc fail, exit
+	while (1)
 	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		bytes_read = read(fd, chunk_buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-		{
-			free(buffer);
-			return (NULL);
-		}
-		buffer[bytes_read] = '\0';
-		full = ft_strjoin(full, buffer);
-		if (ft_strchr(buffer, '\n'))
+			return (free(chunk_buffer), free(static_buffer),
+				static_buffer = NULL, NULL); //read fail, exit
+		chunk_buffer[bytes_read] = '\0';
+		static_buffer = ft_strjoin(static_buffer, chunk_buffer);
+		if (!static_buffer)
+			return (free(static_buffer), static_buffer = NULL, NULL); //malloc fail, exit
+		if (ft_strchr(chunk_buffer, '\n') || bytes_read < BUFFER_SIZE)
 			break ;
 	}
-	free(buffer);
-	return (full);
+	free(chunk_buffer);
+	return (static_buffer);
 }
 
 /* 	The main function that reads the file and returns the line.
@@ -127,13 +132,20 @@ char	*get_next_line(int fd)
 	}
 	buffer = read_to_buffer(fd, buffer);
 	if (!buffer)
-		return (NULL);
+		return (free(buffer), buffer = NULL, NULL);
 	line = extract_line(buffer);
+	if (!line)
+		return (buffer = NULL, NULL);
 	buffer = get_next(buffer);
+	if (!buffer)
+	{
+		free(buffer);
+		buffer = NULL;
+	}
 	return (line);
 }
-/*
-#include <fcntl.h>
+
+/* #include <fcntl.h>
 
 int	main(void)
 {
@@ -141,39 +153,15 @@ int	main(void)
 	char *line;
 	int i = 0;
 
-	fd = open("read_error.txt", O_RDONLY);
-	printf("first call \n------------------------------------\n");
-	while (i < 2)
-	{
-		line = get_next_line(fd);
-		//printf("%s", line);
-		free(line);
-		i++;
-	}
-	printf("------------------------------------\n\n");
-	close(fd);
-	fd = -10;
-	i = 0;
-
-	printf("second call \n------------------------------------\n");
+	fd = open("giant_line.txt", O_RDONLY);
 	while (i < 1)
 	{
 		line = get_next_line(fd);
-		//printf("%s", line);
+		printf("%s", line);
 		free(line);
 		i++;
 	}
-	printf("------------------------------------\n\n");
-	fd = open("read_error.txt", O_RDONLY);
-	i = 0;
-	printf("third call \n------------------------------------\n");
-	while (i < 4)
-	{
-		line = get_next_line(fd);
-		//printf("%s", line);
-		free(line);
-		i++;
-	}
-	printf("------------------------------------\n");
+	close(fd);
+
 	return (0);
 } */
