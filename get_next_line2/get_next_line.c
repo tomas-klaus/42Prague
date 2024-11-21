@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 11:17:12 by tomasklaus        #+#    #+#             */
-/*   Updated: 2024/11/21 11:09:25 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2024/11/21 13:48:02 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_next(char *buffer)
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (!buffer[i])
-		return (free(buffer), buffer = NULL, NULL); //end of file, exit
+		return (free(buffer), buffer = NULL, NULL);
 	new_buffer = ft_calloc(ft_strlen(buffer) - i + 1, sizeof(char));
 	if (!new_buffer)
 		return (free(buffer), buffer = NULL, NULL);
@@ -49,30 +49,28 @@ char	*extract_line(char *buffer)
 
 	i = 0;
 	if (!buffer[i])
-		return (free(buffer), buffer=NULL, NULL); //empty buffer, end program
+		return (free(buffer), buffer = NULL, NULL);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (buffer[i] == '\n')
 		i++;
 	line = ft_calloc(i + 1, sizeof(char));
 	if (!line)
-		return (free(buffer), buffer = NULL, NULL); //malloc fail, exit
+		return (free(buffer), buffer = NULL, NULL);
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 	{
 		line[i] = buffer[i];
 		i++;
 	}
-	if (buffer[i] && buffer[i] == '\n')
-	{
-		line[i] = '\n';
-		i++;
-	}
+	if (buffer[i] == '\n')
+		line[i++] = '\n';
 	line[i] = '\0';
 	return (line);
 }
 
-/* 	Reads the file by small BUFFER_SIZE chunks and adds them to the static_buffer.
+/* 	Reads the file by small BUFFER_SIZE chunks and adds them
+	to the static_buffer.
 	When the '\n' character is located, it breaks the loop, frees
 	the chunk_buffer and returns static_buffer */
 
@@ -84,20 +82,20 @@ char	*read_to_buffer(int fd, char *static_buffer)
 	if (!static_buffer)
 		static_buffer = ft_calloc(1, 1);
 	if (!static_buffer)
-		return (NULL); //malloc fail, exit
+		return (NULL);
 	chunk_buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!chunk_buffer)
-		return (free(static_buffer), static_buffer = NULL, NULL); //malloc fail, exit
+		return (free(static_buffer), static_buffer = NULL, NULL);
 	while (1)
 	{
 		bytes_read = read(fd, chunk_buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
 			return (free(chunk_buffer), free(static_buffer),
-				static_buffer = NULL, NULL); //read fail, exit
+				static_buffer = NULL, NULL);
 		chunk_buffer[bytes_read] = '\0';
 		static_buffer = ft_strjoin(static_buffer, chunk_buffer);
 		if (!static_buffer)
-			return (free(static_buffer), static_buffer = NULL, NULL); //malloc fail, exit
+			return (free(static_buffer), static_buffer = NULL, NULL);
 		if (ft_strchr(chunk_buffer, '\n') || bytes_read < BUFFER_SIZE)
 			break ;
 	}
