@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:31:20 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/01/03 18:33:43 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/01 12:30:25 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	ft_atoi(const char *nptr)
 		return (0);
 	result = 0;
 	i = 0;
-	minus = 0;
+	minus = 1;
 	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
 		i++;
 	if (nptr[i] == '+' || nptr[i] == '-')
 	{
 		if (nptr[i] == '-')
-			minus++;
+			minus *= -1;
 		i++;
 	}
 	while ((nptr[i] >= 48 && nptr[i] <= 57))
@@ -36,9 +36,7 @@ int	ft_atoi(const char *nptr)
 		result = result * 10 + (nptr[i] - '0');
 		i++;
 	}
-	if (minus)
-		result *= -1;
-	return (result);
+	return (result * minus);
 }
 
 void	send_bit(int pid, int bit)
@@ -47,7 +45,7 @@ void	send_bit(int pid, int bit)
 		kill(pid, SIGUSR1);
 	else
 		kill(pid, SIGUSR2);
-	usleep(100); // Small delay to ensure signal is received
+	usleep(100);
 }
 
 void	send_char(int pid, char c)
@@ -69,7 +67,6 @@ int	encrypt_and_send(char *msg, int pid)
 		send_char(pid, *msg);
 		msg++;
 	}
-	// Send null character at the end of the message
 	send_char(pid, '\0');
 	return (0);
 }
@@ -82,8 +79,12 @@ int	main(int argc, char **argv)
 	if (argc != 3)
 		return (1);
 	pid = ft_atoi(argv[1]);
+	if (!(0 <= pid && pid <= MAX_PID))
+	{
+		ft_printf("Invalid PID\n");
+		return (1);
+	}
 	msg = argv[2];
-	/* Encrypt and send the message */
 	encrypt_and_send(msg, pid);
-	/* Create a stop condition so that the server knows when it has finished receiving the message */
+	return (0);
 }
