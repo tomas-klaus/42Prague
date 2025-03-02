@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:14:40 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/01/22 12:39:16 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/02 17:34:24 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	main(int argc, char **argv)
 		printf("Error parsing map\n");
 		return (1);
 	}
-	
 	graphics(&data);
 	return (0);
 }

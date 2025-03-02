@@ -6,15 +6,27 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 12:31:17 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/02 16:31:17 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/02 17:02:38 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-/* with each signal add either 0 or 1 to a string(?) and then convert and display it all together */
+/* with each signal add either 0 or 1 to a string(?) and
+then convert and display it all together */
 
 char	*g_str;
+
+void	sigint_handler(int sig)
+{
+	(void)sig;
+	if (g_str != NULL)
+	{
+		free(g_str);
+		g_str = NULL;
+	}
+	exit(0);
+}
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
@@ -55,12 +67,10 @@ void	add_to_str(char c)
 	}
 	new_str[i] = c;
 	g_str = new_str;
-	new_str = NULL;
 	i++;
 	if (c == '\0')
 	{
 		i = 0;
-		new_str = NULL;
 	}
 }
 
@@ -88,14 +98,16 @@ void	signal_handler(int signum)
 
 int	main(void)
 {
-	int pid;
+	int	pid;
 
 	g_str = NULL;
 	pid = getpid();
 	ft_printf("The process ID is %d\n", pid);
 	signal(SIGUSR1, signal_handler);
 	signal(SIGUSR2, signal_handler);
+	signal(SIGINT, sigint_handler);
 	while (1)
-		usleep(300);
+		usleep(600);
+	free(g_str);
 	return (0);
 }

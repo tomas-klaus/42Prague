@@ -6,12 +6,11 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:41:50 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/01/22 12:36:43 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/02 17:34:28 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
 
 int	check_filename(char *filename)
 {
@@ -21,7 +20,7 @@ int	check_filename(char *filename)
 	while (filename[i])
 		i++;
 	if (filename[i - 4] == '.' && filename[i - 3] == 'b' && filename[i
-		- 2] == 'e' && filename[i-1] == 'r')
+		- 2] == 'e' && filename[i - 1] == 'r')
 		return (1);
 	return (0);
 }
@@ -59,13 +58,13 @@ char	*read_into_map(int fd)
 	{
 		bytesRead = read(fd, buffer, BUFFER_SIZE);
 		if (bytesRead == BUFFER_SIZE)
-			map = realloc_string(map, buffer, bytesRead+1);
+			map = realloc_string(map, buffer, bytesRead + 1);
 		else
 		{
-			map = malloc(bytesRead+1);
+			map = malloc(bytesRead + 1);
 			if (!map)
 				printf("Error allocating memory");
-			ft_strlcpy(map, buffer, bytesRead+1);
+			ft_strlcpy(map, buffer, bytesRead + 1);
 		}
 	}
 	return (map);

@@ -6,12 +6,11 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:41:40 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/01/22 12:39:13 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/02 17:34:26 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
-
 
 int	check_lines(char *str)
 {
@@ -29,9 +28,10 @@ int	check_lines(char *str)
 		while (str[i] && str[i] != '\n')
 			i++, j++;
 		if (line && line != j)
-			{
-                printf("Error: Map is not rectangular\n");
-                return (0);}
+		{
+			printf("Error: Map is not rectangular\n");
+			return (0);
+		}
 		line = j;
 		if (str[i] && str[i + 1])
 			i++;
@@ -102,12 +102,12 @@ int	parse_map(char *str, t_data *data)
 		return (0);
 	/* i need to load the map once again because flood fill destroyed it */
 	data->map.map = malloc_map(data->map.rows, data->map.columns, str);
-   /* int i = 0;
-	while (data->map.map[i])
-	{
-		printf("%s\n", data->map.map[i]);
-		i++;
-	} */
+	/* int i = 0;
+		while (data->map.map[i])
+		{
+			printf("%s\n", data->map.map[i]);
+			i++;
+		} */
 	if (!data->map.map)
 		return (0);
 	return (1);
