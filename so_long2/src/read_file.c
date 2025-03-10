@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:41:50 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/02 17:34:28 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/10 23:13:29 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*realloc_string(char *old_str, char *buffer, int newbytes)
 	if (!new_str)
 	{
 		free(old_str);
-		printf("Error allocating memory");
+		ft_printf("Error allocating memory");
 	}
 	ft_strlcpy(new_str, old_str, oldbytes);
 	while (new_str[i])
@@ -63,7 +63,7 @@ char	*read_into_map(int fd)
 		{
 			map = malloc(bytesRead + 1);
 			if (!map)
-				printf("Error allocating memory");
+				ft_printf("Error allocating memory");
 			ft_strlcpy(map, buffer, bytesRead + 1);
 		}
 	}
@@ -73,12 +73,12 @@ char	*read_into_map(int fd)
 char	*read_file(char *filename)
 {
 	char *map;
-	printf("Reading file: %s\n", filename);
+	ft_printf("Reading file: %s\n", filename);
 	if (!check_filename(filename))
-		printf("Wrong format");
+		ft_printf("Wrong format");
 	int fd = open(filename, O_RDONLY); // Open file for reading only
 	if (fd == -1)
-		printf("Error opening file\n");
+		ft_printf("Error opening file\n");
 	map = read_into_map(fd); // Read the file
 	close(fd);               // Close the file
 	return (map);

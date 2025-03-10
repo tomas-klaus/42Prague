@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 10:59:50 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/02 17:25:53 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/10 23:11:37 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include "ft_printf.h"
 # include <fcntl.h> // For open()
 # include <stdio.h>
 # include <stdlib.h>
@@ -30,12 +31,20 @@
 #  define DOWN_KEY 125
 #  define LEFT_KEY 123
 #  define RIGHT_KEY 124
+#  define W_KEY 13
+#  define S_KEY 1
+#  define A_KEY 0
+#  define D_KEY 2
 # elif __linux__
 #  define ESC_KEY 65307
 #  define UP_KEY 65362
 #  define DOWN_KEY 65364
 #  define LEFT_KEY 65361
 #  define RIGHT_KEY 65363
+#  define W_KEY 25
+#  define S_KEY 39
+#  define A_KEY 38
+#  define D_KEY 40
 # endif
 
 typedef struct s_map

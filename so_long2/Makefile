@@ -4,7 +4,7 @@ NAME = so_long
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S), Darwin)
-	CC = gcc-14
+	CC = gcc
 	CFLAGS = -Wall -Werror -Wextra -Iinclude -g -D__APPLE__ -DGL_SILENCE_DEPRECATION
 	MLX_DIR = minilibx_macos
 	FRAMEWORKS = -framework OpenGL -framework AppKit
@@ -27,13 +27,21 @@ OBJS = $(SRCS:.c=.o)
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
+# Path to the ft_print directory
+FT_PRINTF_DIR = ft_printf
+FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
+
 # Rule to build the so_long executable
-$(NAME): $(LIBFT) $(MLX_DIR)/libmlx.a $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFT_DIR) -lft $(LIBS)
+$(NAME): $(LIBFT) $(FT_PRINTF) $(MLX_DIR)/libmlx.a $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf $(LIBS)
 
 # Rule to build libft by calling its Makefile
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
+
+# Rule to build ft_printf by calling its Makefile
+$(FT_PRINTF):
+	$(MAKE) -C $(FT_PRINTF_DIR)
 
 # Rule to build MiniLibX
 $(MLX_DIR)/libmlx.a:
@@ -51,11 +59,13 @@ clean:
 	rm -f $(OBJS)
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(MLX_DIR) clean
+	$(MAKE) -C $(FT_PRINTF_DIR) clean
 
 # Clean up object files and the executables
 fclean: clean
 	rm -f $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(FT_PRINTF_DIR) fclean
 
 # Rebuild everything from scratch
 re: fclean all

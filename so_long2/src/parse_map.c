@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:41:40 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/02 17:34:26 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/10 23:13:24 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_lines(char *str)
 			i++, j++;
 		if (line && line != j)
 		{
-			printf("Error: Map is not rectangular\n");
+			ft_printf("Error: Map is not rectangular\n");
 			return (0);
 		}
 		line = j;
@@ -91,9 +91,9 @@ int	parse_map(char *str, t_data *data)
 	data->map.columns = check_lines(str);
 	if (!data->map.columns)
 		return (0);
-	printf("Lines ok! line length: %d\n", data->map.columns);
+	ft_printf("Lines ok! line length: %d\n", data->map.columns);
 	data->map.rows = ft_strlen(str) / data->map.columns;
-	printf("Map ok! map size: rows: %d x columns: %d\n", data->map.rows,
+	ft_printf("Map ok! map size: rows: %d x columns: %d\n", data->map.rows,
 		data->map.columns);
 	data->map.map = malloc_map(data->map.rows, data->map.columns, str);
 	if (!data->map.map)
@@ -105,7 +105,7 @@ int	parse_map(char *str, t_data *data)
 	/* int i = 0;
 		while (data->map.map[i])
 		{
-			printf("%s\n", data->map.map[i]);
+			ft_printf("%s\n", data->map.map[i]);
 			i++;
 		} */
 	if (!data->map.map)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:59:22 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/02 17:34:21 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/10 23:13:17 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,23 @@ int	load_textures(t_data *data)
 	data->img.wall = mlx_xpm_file_to_image(data->mlx, "textures/wall.xpm",
 			&data->img.width, &data->img.height);
 	if (!data->img.wall)
-		return (1); // Failed to load texture
+		return (1); 
 	data->img.empty = mlx_xpm_file_to_image(data->mlx, "textures/empty.xpm",
 			&data->img.width, &data->img.height);
 	if (!data->img.empty)
-		return (1); // Failed to load texture
+		return (1); 
 	data->img.player = mlx_xpm_file_to_image(data->mlx, "textures/player.xpm",
 			&data->img.width, &data->img.height);
 	if (!data->img.player)
-		return (1); // Failed to load texture
+		return (1); 
 	data->img.exit = mlx_xpm_file_to_image(data->mlx, "textures/exit.xpm",
 			&data->img.width, &data->img.height);
 	if (!data->img.exit)
-		return (1); // Failed to load texture
+		return (1); 
 	data->img.col = mlx_xpm_file_to_image(data->mlx, "textures/collectible.xpm",
 			&data->img.width, &data->img.height);
 	if (!data->img.col)
-		return (1); // Failed to load texture
+		return (1); 
 	return (0);
 }
 void	put_imgs(t_data *data, int width, int i, int j)
@@ -81,7 +81,7 @@ int	render(t_data *data)
 		width = 0;
 		i++;
 	}
-	printf("Player: %d %d\n", data->p_row, data->p_col);
+	//ft_printf("Player: %d %d\n", data->p_row, data->p_col);
 	return (1);
 }
 
@@ -92,13 +92,13 @@ void	graphics(t_data *data)
 			(data->map.rows * IMG_SIZE), "so_long");
 	if (load_textures(data))
 	{
-		printf("Failed to load textures\n");
+		ft_printf("Failed to load textures\n");
 		exit(1);
 	}
-	printf("Textures loaded\n");
+	ft_printf("Textures loaded\n");
 	render(data);
-	printf("Map rendered\n");
+	ft_printf("Map rendered\n");
 	hooks(data);
-	printf("Hooks set\n");
+	ft_printf("Hooks set\n");
 	mlx_loop(data->mlx);
 }
