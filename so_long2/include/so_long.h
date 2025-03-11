@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 10:59:50 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/10 23:11:37 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/11 11:33:08 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include "ft_printf.h"
 # include "libft.h"
 # include "mlx.h"
-# include "ft_printf.h"
 # include <fcntl.h> // For open()
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h> // For close()
 
-# define BUFFER_SIZE 1024
+# define BUFFER_SIZE 20
 # define IMG_SIZE 32
 
 # define DESTROY_NOTIFY 17
@@ -41,10 +41,10 @@
 #  define DOWN_KEY 65364
 #  define LEFT_KEY 65361
 #  define RIGHT_KEY 65363
-#  define W_KEY 25
-#  define S_KEY 39
-#  define A_KEY 38
-#  define D_KEY 40
+#  define W_KEY 119
+#  define S_KEY 115
+#  define A_KEY 97
+#  define D_KEY 100
 # endif
 
 typedef struct s_map
