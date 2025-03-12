@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:34:37 by tklaus            #+#    #+#             */
-/*   Updated: 2024/10/03 14:01:31 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/12 19:34:30 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	}
 	if (size <= dst_len)
 		return (size + src_len);
-	while (src[i] != '\0' && dst_len + i < size - 1)
+	while (src[i] != '\0' && dst_len + i < size)
 	{
 		dst[dst_len + i] = src[i];
 		i++;

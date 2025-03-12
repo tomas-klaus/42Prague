@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 10:59:50 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/11 11:33:08 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/12 19:35:54 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdlib.h>
 # include <unistd.h> // For close()
 
-# define BUFFER_SIZE 20
+# define BUFFER_SIZE 1024
 # define IMG_SIZE 32
 
 # define DESTROY_NOTIFY 17

@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:48:37 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/10 23:13:27 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/12 20:29:54 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,13 @@ int	check_walls(char **map, int row, int column)
 	while (i < row)
 	{
 		if (map[i][0] != '1' || map[i][column - 1] != '1')
-		{
-			ft_printf("Error: Map is not enclosed in walls\n");
 			return (0);
-		}
 		i++;
 	}
 	while (j < column)
 	{
 		if (map[0][j] != '1' || map[row - 1][j] != '1')
-		{
-			ft_printf("Error: Map is not enclosed in walls\n");
 			return (0);
-		}
 		j++;
 	}
 	return (1);
@@ -65,10 +59,7 @@ int	check_items(char **map, int row, int column)
 		i++;
 	}
 	if (counts[0] != 1 || counts[2] != 1 || counts[1] == 0)
-	{
-		ft_printf("Error: Map is missing items\n");
 		return (0);
-	}
 	return (counts[1]);
 }
 
@@ -116,7 +107,6 @@ int	flood_fill(char **map, int row, int column)
 	flood_fill(map, row, column - 1);
 	if (!exit)
 	{
-		ft_printf("Error: Exit is not reachable\n");
 		return (0);
 	}
 	return (collectible);
@@ -129,19 +119,14 @@ int	validate_map(char **map, int row, int column, t_data *data)
 
 	if (!check_walls(map, row, column))
 		return (0);
-	ft_printf("Walls OK\n");
 	data->map.collectibles = check_items(map, row, column);
-	ft_printf("Collectibles: %d\n", data->map.collectibles);
 	if (!data->map.collectibles)
 		return (0);
 	find_player(map, row, column, start);
-	ft_printf("Player: Row %d, Column %d\n", start[0], start[1]);
 	data->p_row = start[0];
 	data->p_col = start[1];
 	reachable = flood_fill(map, start[0], start[1]);
-	ft_printf("Reachable collectibles: %d\n", reachable);
 	if (!reachable || !(data->map.collectibles == reachable))
 		return (0);
-	ft_printf("Map is valid\n");
 	return (1);
 }

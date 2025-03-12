@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:15:11 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/11 12:19:19 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/12 20:27:42 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	key_handler(int keycode, t_data *data)
 		if (data->map.map[data->p_row][data->p_col + 1] != '1')
 			data->p_col += 1;
 	col_checker(data);
-	mlx_clear_window(data->mlx, data->win); // Clear the window before redrawing
+	mlx_clear_window(data->mlx, data->win);
 	render(data);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:14:40 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/11 10:17:45 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/12 20:26:58 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,10 @@ int	main(int argc, char **argv)
 	strmap = read_file(argv[1]);
 	if (!strmap)
 		return (1);
-	// ft_printf("Map:\n%s\n\n", strmap);
 	if (!parse_map(strmap, &data))
 	{
 		free(strmap);
-		ft_printf("Error parsing map\n");
+		ft_printf("Error\n");
 		return (1);
 	}
 	graphics(&data);

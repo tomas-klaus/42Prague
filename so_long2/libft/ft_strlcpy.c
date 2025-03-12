@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:24:04 by tklaus            #+#    #+#             */
-/*   Updated: 2024/10/03 14:01:44 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/12 19:34:41 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	if (size == 0)
 		return (src_len);
 	i = 0;
-	while (i < size - 1 && src[i] != '\0')
+	while (i < size && src[i] != '\0')
 	{
 		dst[i] = src[i];
 		i++;

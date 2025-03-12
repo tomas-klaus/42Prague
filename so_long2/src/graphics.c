@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:59:22 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/10 23:13:17 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/12 20:27:30 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ void	put_imgs(t_data *data, int width, int i, int j)
 	else if (data->map.map[i][j] == '0')
 		mlx_put_image_to_window(data->mlx, data->win, data->img.empty, width, i
 			* IMG_SIZE);
-	/* else if (data->map.map[i][j] == 'P')
-		mlx_put_image_to_window(data->mlx, data->win, data->img.player,
-			width, i * IMG_SIZE); */
 	else if (data->map.map[i][j] == 'E')
 		mlx_put_image_to_window(data->mlx, data->win, data->img.exit, width, i
 			* IMG_SIZE);
@@ -81,7 +78,6 @@ int	render(t_data *data)
 		width = 0;
 		i++;
 	}
-	//ft_printf("Player: %d %d\n", data->p_row, data->p_col);
 	return (1);
 }
 
@@ -95,10 +91,7 @@ void	graphics(t_data *data)
 		ft_printf("Failed to load textures\n");
 		exit(1);
 	}
-	ft_printf("Textures loaded\n");
 	render(data);
-	ft_printf("Map rendered\n");
 	hooks(data);
-	ft_printf("Hooks set\n");
 	mlx_loop(data->mlx);
 }
