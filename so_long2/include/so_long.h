@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 10:59:50 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/12 19:35:54 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/14 12:56:42 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ int			validate_map(char **map, int x, int y, t_data *data);
 void		graphics(t_data *data);
 int			hooks(t_data *data);
 int			render(t_data *data);
+int			count_items(char **map, int row, int column, int counts[3]);
+void		deinit(t_data data);
 
 #endif

@@ -4,7 +4,7 @@
 EXECUTABLE="./so_long"
 
 # Path to the maps_err directory
-MAPS_DIR="./maps2/invalid"
+MAPS_DIR="./maps_err"
 
 # Loop through all files in the maps_err directory
 for map in "$MAPS_DIR"/*

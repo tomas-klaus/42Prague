@@ -20,6 +20,7 @@ endif
 SRCS_DIR = src
 SRCS = $(SRCS_DIR)/main.c $(SRCS_DIR)/graphics.c $(SRCS_DIR)/hooks.c \
 	$(SRCS_DIR)/parse_map.c $(SRCS_DIR)/parse_map2.c $(SRCS_DIR)/read_file.c \
+	$(SRCS_DIR)/helpers.c $(SRCS_DIR)/deinit.c
 	
 OBJS = $(SRCS:.c=.o)
 

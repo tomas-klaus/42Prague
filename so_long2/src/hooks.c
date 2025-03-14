@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:15:11 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/12 20:27:42 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/14 12:57:23 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	col_checker(t_data *data)
 		&& data->map.collectibles == 0)
 	{
 		mlx_destroy_window(data->mlx, data->win);
+		deinit(*data);
 		ft_printf("You won!\n");
 		exit(0);
 	}
@@ -52,6 +53,8 @@ int	key_handler(int keycode, t_data *data)
 	if (keycode == ESC_KEY)
 	{
 		mlx_destroy_window(data->mlx, data->win);
+		deinit(*data);
+		ft_printf("The end\n");
 		exit(0);
 	}
 	if (keycode == UP_KEY || keycode == W_KEY)
@@ -75,6 +78,8 @@ int	key_handler(int keycode, t_data *data)
 int	close_handler(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
+	deinit(*data);
+	
 	exit(0);
 	return (0);
 }
@@ -83,6 +88,8 @@ int	hooks(t_data *data)
 {
 	mlx_hook(data->win, 2, 1L << 0, key_handler, data);
 	mlx_hook(data->win, 17, 1L << 17, close_handler, data);
+	
 	mlx_loop(data->mlx);
+	
 	return (0);
 }

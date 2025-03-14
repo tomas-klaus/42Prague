@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:41:40 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/12 20:43:57 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/14 13:22:16 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void free_2d_array(char **array, int i)
+void	free_2d_array(char **array, int rows)
 {
-	while (i >= 0)
-	{
-		free(array[i]);
-		i--;
-	}
-	free(array);
+    int i = 0;
+    while (i < rows)
+    {
+        free(array[i]);
+        i++;
+    }
+    free(array);
 }
 
 int	check_lines(char *str)
@@ -36,16 +37,19 @@ int	check_lines(char *str)
 	{
 		j = 0;
 		while (str[i] && str[i] != '\n')
-			i++, j++;
+		{
+			i++;
+			j++;
+		}
 		if (line && line != j)
 			return (0);
-		
 		line = j;
 		if (str[i] && str[i + 1])
 			i++;
 	}
 	return (line);
 }
+
 char	**fill_map(char **map, int rows, int columns, char *str)
 {
 	int	i;
@@ -82,7 +86,7 @@ char	**malloc_map(int rows, int columns, char *str)
 		return (0);
 	while (i < rows)
 	{
-		map[i] = malloc(columns * sizeof(char));
+		map[i] = malloc(columns + 1 * sizeof(char));
 		if (!map[i])
 		{
 			free_2d_array(map, i);
@@ -99,14 +103,13 @@ int	parse_map(char *str, t_data *data)
 	data->map.columns = check_lines(str);
 	if (!data->map.columns)
 		return (0);
-	
 	data->map.rows = ft_strlen(str) / data->map.columns;
 	data->map.map = malloc_map(data->map.rows, data->map.columns, str);
 	if (!data->map.map)
 		return (0);
 	if (!validate_map(data->map.map, data->map.rows, data->map.columns, data))
 		return (0);
-	/* i need to load the map once again because flood fill destroyed it */
+	free_2d_array(data->map.map, data->map.rows);
 	data->map.map = malloc_map(data->map.rows, data->map.columns, str);
 	if (!data->map.map)
 		return (0);

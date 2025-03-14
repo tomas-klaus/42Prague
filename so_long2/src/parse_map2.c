@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:48:37 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/12 20:29:54 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/14 12:17:52 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,29 +36,12 @@ int	check_walls(char **map, int row, int column)
 
 int	check_items(char **map, int row, int column)
 {
-	int	i;
-	int	j;
-	int	counts[3] = {0, 0, 0};
+	int	counts[3];
 
-	i = 0;
-	while (i < row)
-	{
-		j = 0;
-		while (j < column)
-		{
-			if (map[i][j] == 'E')
-				counts[0]++;
-			else if (map[i][j] == 'C')
-				counts[1]++;
-			else if (map[i][j] == 'P')
-				counts[2]++;
-			else if (!(map[i][j] == '1' || map[i][j] == '0'))
-				counts[0] = 2;
-			j++;
-		}
-		i++;
-	}
-	if (counts[0] != 1 || counts[2] != 1 || counts[1] == 0)
+	counts[0] = 0;
+	counts[1] = 0;
+	counts[2] = 0;
+	if (count_items(map, row, column, counts))
 		return (0);
 	return (counts[1]);
 }
@@ -95,7 +78,6 @@ int	flood_fill(char **map, int row, int column)
 	wall = '1';
 	if (map[row][column] == wall)
 		return (0);
-	;
 	if (map[row][column] == 'E')
 		exit++;
 	if (map[row][column] == 'C')
@@ -114,9 +96,11 @@ int	flood_fill(char **map, int row, int column)
 
 int	validate_map(char **map, int row, int column, t_data *data)
 {
-	int	start[2] = {0, 0};
+	int	start[2];
 	int	reachable;
 
+	start[0] = 0;
+	start[1] = 0;
 	if (!check_walls(map, row, column))
 		return (0);
 	data->map.collectibles = check_items(map, row, column);
