@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:14:40 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/14 14:06:18 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/14 14:34:04 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,18 @@ Draw the player}
 Key handler
 {Is the requested new position a Wall ?
 	if the new position is a Wall,
-		don't do anything. The subject says that the player should not 
+		don't do anything. The subject says that the player should not
 		be able to go through walls
 Is the requested new position inside the map ?
 	if the new position is outside the map,
-		don't do anything. Normally this shouldn't happen since the 
+		don't do anything. Normally this shouldn't happen since the
 		map is enclosed in walls but hey,
 		never too sure.
 Is the requested new position a Collectible ?
 	if yes, update the collected items counter and check
 	check if all collectibles have been collected
 		if yes, unlock the exit
-	update your map 2D array and replace the collectible by a "floor" 
+	update your map 2D array and replace the collectible by a "floor"
 	tile so that it is not drawn in the next iteration of the game loop.
 If the requested new position is not a wall, nor a collectible,
 	nor outside the map,
@@ -90,6 +90,5 @@ int	main(int argc, char **argv)
 	}
 	free(strmap);
 	graphics(&data);
-	
 	return (0);
 }

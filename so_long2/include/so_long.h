@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 10:59:50 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/14 14:16:00 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/14 14:43:38 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ft_printf.h"
 # include "libft.h"
-# include "mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include <fcntl.h> // For open()
 # include <stdio.h>
 # include <stdlib.h>

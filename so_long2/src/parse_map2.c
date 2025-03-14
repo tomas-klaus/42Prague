@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 19:48:37 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/14 14:25:58 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/14 14:35:55 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ int	validate_map(char **map, int row, int column, t_data *data)
 		ft_printf("Error: Map is not enclosed in walls\n");
 		return (0);
 	}
-	if (0 == (data->map.collectibles = check_items(map, row, column)))
+	data->map.collectibles = check_items(map, row, column);
+	if (!data->map.collectibles)
 		return (0);
 	find_player(map, row, column, start);
 	data->p_row = start[0];

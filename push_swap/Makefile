@@ -9,8 +9,9 @@ LIBFT_PATH = libft/
 LIBFT_LIB = $(LIBFT_PATH)libft.a
 
 
-
-CFILES = main.c parse_input.c helpers.c
+SRCS_DIR = src
+CFILES = $(SRCS_DIR)/main.c $(SRCS_DIR)/parse_input.c $(SRCS_DIR)/helpers.c $(SRCS_DIR)/quicksort.c
+		$(SRCS_DIR)/stack.c $(SRCS_DIR)/simple.c
 
 OBJECTS = $(CFILES:.c=.o)
 

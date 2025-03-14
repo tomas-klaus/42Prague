@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:15:11 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/14 14:05:28 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/14 14:33:38 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	close_handler(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
 	deinit(*data);
-	
 	exit(0);
 	return (0);
 }
@@ -87,8 +86,6 @@ int	hooks(t_data *data)
 {
 	mlx_hook(data->win, 2, 1L << 0, key_handler, data);
 	mlx_hook(data->win, 17, 1L << 17, close_handler, data);
-	
 	mlx_loop(data->mlx);
-	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:41:40 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/14 14:20:04 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/14 14:34:15 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 void	free_2d_array(char **array, int rows)
 {
-    int i = 0;
-    while (i < rows)
-    {
-        free(array[i]);
-        i++;
-    }
-    free(array);
+	int	i;
+
+	i = 0;
+	while (i < rows)
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
 }
 
 int	check_lines(char *str)
@@ -101,11 +103,11 @@ char	**malloc_map(int rows, int columns, char *str)
 int	parse_map(char *str, t_data *data)
 {
 	data->map.columns = check_lines(str);
-	if (!data->map.columns){
+	if (!data->map.columns)
+	{
 		ft_printf("Error: Map is not rectangular\n");
 		return (0);
 	}
-		
 	data->map.rows = ft_strlen(str) / data->map.columns;
 	data->map.map = malloc_map(data->map.rows, data->map.columns, str);
 	if (!data->map.map)

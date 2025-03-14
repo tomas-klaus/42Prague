@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 12:53:47 by tklaus            #+#    #+#             */
-/*   Updated: 2025/03/14 13:19:36 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/14 14:34:30 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,4 @@ void	deinit(t_data data)
 	free_map(&data.map);
 	destroy_images(data);
 	free(data.mlx);
-	//free(data.win);
-};
+}
