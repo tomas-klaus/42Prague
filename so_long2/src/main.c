@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:14:40 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/14 13:13:06 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/14 14:06:18 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!parse_map(strmap, &data))
 	{
-		
-		ft_printf("Error\n");
+		free(strmap);
 		return (1);
 	}
 	free(strmap);

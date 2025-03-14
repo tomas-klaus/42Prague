@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 18:15:11 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/14 12:57:23 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/14 14:05:28 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	key_handler(int keycode, t_data *data)
 	{
 		mlx_destroy_window(data->mlx, data->win);
 		deinit(*data);
-		ft_printf("The end\n");
 		exit(0);
 	}
 	if (keycode == UP_KEY || keycode == W_KEY)

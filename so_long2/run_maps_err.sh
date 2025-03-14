@@ -4,12 +4,13 @@
 EXECUTABLE="./so_long"
 
 # Path to the maps_err directory
-MAPS_DIR="./maps_err"
+MAPS_DIR="./maps_valid"
 
 # Loop through all files in the maps_err directory
 for map in "$MAPS_DIR"/*
 do
   # Run the executable with the current map
-  echo "Running $EXECUTABLE with map $map"
+  echo "
+  Running map $map"
   $EXECUTABLE "$map"
 done
