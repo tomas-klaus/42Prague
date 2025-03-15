@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:37:12 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/14 18:36:51 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/15 20:45:17 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,11 @@ int	fill_array(int **arr, int argc, char **argv, int count)
 			if (check_overflow(arg_arr[j]))
 				return (1);
 			(*arr)[k] = ft_atoi(arg_arr[j]);
-			printf("%d ", (*arr)[k]);
 			j++;
 			k++;
 		}
 		i++;
 	}
-	printf("\n");
 	return (0);
 }
 
@@ -135,7 +133,6 @@ int	*parse_input(int argc, char **argv, int *size)
 
 	count = 0;
 	i = 1;
-	printf("Number of arguments: %d\n", argc);
 	while (i <= argc - 1)
 	{
 		count += check_and_count(argv[i]);
@@ -146,12 +143,20 @@ int	*parse_input(int argc, char **argv, int *size)
 		}
 		i++;
 	}
-	printf("size: %d\n", count);
+	printf("Arguments: %d, Size: %d\n", argc-1, count);
 	arr = malloc(count * sizeof(int));
 	if (fill_array(&arr, argc, argv, count))
 	{
 		return (NULL);
 	}
+	printf("Array: ");
+	i = 0;
+	while (i < count)
+	{
+		printf("%d ", arr[i]);
+		i++;
+	}
+	printf("\n");
 	if (map_ranks(arr, count))
 		return (NULL);
 	*size = count;

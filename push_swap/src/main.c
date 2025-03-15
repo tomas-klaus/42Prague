@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:22:51 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/14 17:55:13 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/15 21:28:34 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,35 @@ sorting alghorithm QUICKSORT
 
 #include "../include/header.h"
 
-static void	sort_stack(t_list **stack_a, t_list **stack_b, int size)
+static void sort_stack(t_list **stack_a, t_list **stack_b, int size)
 {
 	if (is_sorted(stack_a))
 	{
 		free_stack(stack_a);
 		free_stack(stack_b);
-		return ;
+		return;
 	}
+	printf("----------Sorting stack-----------\n");
 	if (size <= 5)
 		simple_sort(stack_a, stack_b, size);
-	else
-		quick_sort(stack_a, stack_b);
+	/* else
+		quick_sort(stack_a, stack_b); */
+
+	print_stack(stack_a);
+	//print_stack(stack_b);
 	free_stack(stack_a);
 	free_stack(stack_b);
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	int		size;
-	int		*arr;
-	t_list	**stack_a;
-	t_list	**stack_b;
+	int size;
+	int *arr;
+	t_list **stack_a;
+	t_list **stack_b;
+
+	stack_a = (t_list **)malloc(sizeof(t_list));
+	stack_b = (t_list **)malloc(sizeof(t_list));
 
 	size = 0;
 	if (argc < 2)
@@ -85,7 +92,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_stack(stack_a, stack_b, arr, size);
+	print_stack(stack_a);
 	free(arr);
 	sort_stack(stack_a, stack_b, size);
+
 	return (0);
 }
