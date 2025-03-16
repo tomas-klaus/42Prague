@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:37:12 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/15 20:45:17 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/16 11:57:20 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,20 +143,20 @@ int	*parse_input(int argc, char **argv, int *size)
 		}
 		i++;
 	}
-	printf("Arguments: %d, Size: %d\n", argc-1, count);
+	//printf("Arguments: %d, Size: %d\n", argc-1, count);
 	arr = malloc(count * sizeof(int));
 	if (fill_array(&arr, argc, argv, count))
 	{
 		return (NULL);
 	}
-	printf("Array: ");
+	/* printf("Array: ");
 	i = 0;
 	while (i < count)
 	{
 		printf("%d ", arr[i]);
 		i++;
 	}
-	printf("\n");
+	printf("\n"); */
 	if (map_ranks(arr, count))
 		return (NULL);
 	*size = count;

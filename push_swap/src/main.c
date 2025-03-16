@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:22:51 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/15 21:28:34 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/16 12:00:22 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,17 @@ function	parse_input(arguments):
 	convert to integers
 	map ranks
 
-
-
 initialize stack A with parsed numbers
 initialize empty stack B
 
 check if stack A is sorted
-
 sort stack
 	if handle small cases (2,3,4,5)
 		sort2 (only sa)
 		sort3
 		sort4
 		sort5
-	else use radix sort
+	else use quicksort
 
 optimize moves
 
@@ -51,6 +48,7 @@ sorting alghorithm QUICKSORT
 
 static void sort_stack(t_list **stack_a, t_list **stack_b, int size)
 {
+	static int not_sorted = 0;
 	if (is_sorted(stack_a))
 	{
 		free_stack(stack_a);
@@ -65,6 +63,11 @@ static void sort_stack(t_list **stack_a, t_list **stack_b, int size)
 
 	print_stack(stack_a);
 	//print_stack(stack_b);
+	if(is_sorted(stack_a))
+		printf("SORTED\n");
+	else 
+		not_sorted++;
+	printf("NOT SORTED: %d\n\n", not_sorted);
 	free_stack(stack_a);
 	free_stack(stack_b);
 }

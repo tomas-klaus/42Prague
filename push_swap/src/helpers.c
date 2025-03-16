@@ -6,16 +6,47 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:09:41 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/15 21:42:53 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/16 11:51:32 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/header.h"
 
-int get_distance(){
-    
+int get_min(t_list **stack){
+    t_list *first;
+    int min;
+
+    first = *stack;
+    min = first->content;
+    while(first->next){
+        if (min > first->next->content)
+            min = first->next->content;
+        first = first->next;
+    }
+    return (min);
 }
 
+/*
+get the distance of the requested node from the top
+if its smaller or equal than size/2 -> return the distance
+else if its bigger than size/2 -> return (size-distance)*-1
+*/
+int get_distance(t_list **stack, int value, int size)
+{
+    t_list *first;
+    int dist;
+
+    dist = 0;
+    first = *stack;
+    while (first->content != value)
+    {
+        first = first->next;
+        dist++;
+    }
+    if (dist > size / 2)
+        return (dist - size);
+    return (dist);
+}
 
 int ft_sort(int *sorted_arr, int count)
 {

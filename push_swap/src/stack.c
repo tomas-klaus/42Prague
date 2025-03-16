@@ -6,11 +6,25 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:22:48 by tklaus            #+#    #+#             */
-/*   Updated: 2025/03/15 20:36:15 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/16 10:53:13 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/header.h"
+
+int is_sorted(t_list **stack)
+{
+    t_list *current;
+
+    current = *stack;
+    while (current->next != NULL)
+    {
+        if (current->content > current->next->content)
+            return (0);
+        current = current->next;
+    }
+    return (1);
+}
 
 void free_stack(t_list **stack)
 {

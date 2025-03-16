@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 18:37:29 by tklaus            #+#    #+#             */
-/*   Updated: 2025/03/15 21:27:14 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/16 11:18:41 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,39 +63,39 @@ void swap(t_list *stack)
 
 void pa(t_list **stack_to, t_list **stack_from)
 {
-	t_list *a;
-	t_list *b;
+	t_list *to;
+	t_list *from;
 	int value;
 
-	if (*stack_from == NULL || (*stack_from)->next == NULL)
+	if (*stack_from == NULL)
 		return;
 
-	b = *stack_from;
-	value = b->content;
-	a = ft_lstnew(value);
-	ft_lstadd_front(stack_to, a);
+	from = *stack_from;
+	value = from->content;
+	to = ft_lstnew(value);
+	ft_lstadd_front(stack_to, to);
 
-	*stack_from = b->next;
-	free(b);
+	*stack_from = from->next;
+	free(from);
 	printf("pa\n");
 }
 
-void pb(t_list **stack_a, t_list **stack_b)
+void pb(t_list **stack_from, t_list **stack_to)
 {
-	t_list *a;
-	t_list *b;
+	t_list *to;
+	t_list *from;
 	int value;
 
-	if (*stack_a == NULL || (*stack_a)->next == NULL)
+	if (*stack_from == NULL)
 		return;
 
-	a = *stack_a;
-	value = a->content;
-	b = ft_lstnew(value);
-	ft_lstadd_front(stack_b, b);
+	from = *stack_from;
+	value = from->content;
+	to = ft_lstnew(value);
+	ft_lstadd_front(stack_to, to);
 
-	*stack_a = a->next;
-	free(a);
+	*stack_from = from->next;
+	free(from);
 	printf("pb\n");
 }
 
