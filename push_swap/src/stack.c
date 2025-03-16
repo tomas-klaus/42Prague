@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:22:48 by tklaus            #+#    #+#             */
-/*   Updated: 2025/03/16 10:53:13 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/16 14:17:24 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 int is_sorted(t_list **stack)
 {
-    t_list *current;
+	t_list *current;
 
-    current = *stack;
-    while (current->next != NULL)
-    {
-        if (current->content > current->next->content)
-            return (0);
-        current = current->next;
-    }
-    return (1);
+	current = *stack;
+	while (current->next != NULL)
+	{
+		if (current->content > current->next->content)
+			return (0);
+		current = current->next;
+	}
+	return (1);
 }
 
 void free_stack(t_list **stack)
 {
-	t_list	*current;
-	t_list	*next;
+	t_list *current;
+	t_list *next;
 
 	current = *stack;
 	while (current != NULL)
@@ -43,22 +43,21 @@ void free_stack(t_list **stack)
 
 void print_stack(t_list **stack)
 {
-    t_list *current;
+	t_list *current;
 
-    current = *stack;
-	printf("Stack: ");
-    while (current != NULL)
-    {
-        printf("%d ", current->content);
-        current = current->next;
-    }
+	current = *stack;
+	while (current != NULL)
+	{
+		printf("%d ", current->content);
+		current = current->next;
+	}
 	printf("\n");
 }
 
-void	fill_stack(t_list **stack_a, int *arr, int size)
+void fill_stack(t_list **stack_a, int *arr, int size)
 {
-	t_list	*new_node;
-	int		i;
+	t_list *new_node;
+	int i;
 
 	i = 0;
 	while (i < size)
@@ -69,7 +68,7 @@ void	fill_stack(t_list **stack_a, int *arr, int size)
 	}
 }
 
-int	init_stack(t_list **stack_a, t_list **stack_b, int *arr, int size)
+int init_stack(t_list **stack_a, t_list **stack_b, int *arr, int size)
 {
 	*stack_a = NULL;
 	*stack_b = NULL;

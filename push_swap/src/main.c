@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:22:51 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/16 12:00:22 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/16 14:17:17 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ sorting alghorithm QUICKSORT
 
 static void sort_stack(t_list **stack_a, t_list **stack_b, int size)
 {
-	static int not_sorted = 0;
+	//static int not_sorted = 0;
 	if (is_sorted(stack_a))
 	{
 		free_stack(stack_a);
@@ -58,16 +58,17 @@ static void sort_stack(t_list **stack_a, t_list **stack_b, int size)
 	printf("----------Sorting stack-----------\n");
 	if (size <= 5)
 		simple_sort(stack_a, stack_b, size);
-	/* else
-		quick_sort(stack_a, stack_b); */
-
+	else
+		quick_sort(stack_a, stack_b, size);
+	printf("[S T A C K - A]\n");
 	print_stack(stack_a);
-	//print_stack(stack_b);
-	if(is_sorted(stack_a))
+	printf("[S T A C K - B]\n");
+	print_stack(stack_b);
+	if (is_sorted(stack_a))
 		printf("SORTED\n");
-	else 
+	/* else
 		not_sorted++;
-	printf("NOT SORTED: %d\n\n", not_sorted);
+	printf("NOT SORTED: %d\n\n", not_sorted); */
 	free_stack(stack_a);
 	free_stack(stack_b);
 }

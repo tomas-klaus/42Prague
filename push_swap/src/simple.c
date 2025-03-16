@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:55:58 by tklaus            #+#    #+#             */
-/*   Updated: 2025/03/16 11:59:18 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/16 14:18:22 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void sort2(t_list **stack)
 {
-    sa(stack);
+    if (!(is_sorted(stack)))
+        sa(stack);
 }
 
 void sort3(t_list **stack)
@@ -49,27 +50,11 @@ push the smallest number back to stack A
 */
 void sort4(t_list **stack_a, t_list **stack_b, int size)
 {
-    int dist;
-    int i;
     int min;
 
     min = get_min(stack_a);
-    i = 0;
-    dist = get_distance(stack_a, min, size);
-
-    while (i != dist)
-    {
-        if (dist > 0)
-        {
-            ra(stack_a);
-            i++;
-        }
-        else if (dist < 0)
-        {
-            rra(stack_a);
-            i--;
-        }
-    }
+    
+    rotate_distance(stack_a,min,size);
     pb(stack_a, stack_b);
     sort3(stack_a);
     pa(stack_a, stack_b);
@@ -77,27 +62,11 @@ void sort4(t_list **stack_a, t_list **stack_b, int size)
 
 void sort5(t_list **stack_a, t_list **stack_b, int size)
 {
-    int dist;
-    int i;
     int min;
 
     min = get_min(stack_a);
-    i = 0;
-    dist = get_distance(stack_a, min, size);
-
-    while (i != dist)
-    {
-        if (dist > 0)
-        {
-            ra(stack_a);
-            i++;
-        }
-        else if (dist < 0)
-        {
-            rra(stack_a);
-            i--;
-        }
-    }
+    
+    rotate_distance(stack_a,min,size);
     pb(stack_a, stack_b);
     sort4(stack_a, stack_b, 4);
     pa(stack_a, stack_b);

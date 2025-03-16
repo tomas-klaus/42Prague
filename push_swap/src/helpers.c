@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:09:41 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/16 11:51:32 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/16 13:10:39 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ int get_min(t_list **stack){
     return (min);
 }
 
+
 /*
 get the distance of the requested node from the top
 if its smaller or equal than size/2 -> return the distance
 else if its bigger than size/2 -> return (size-distance)*-1
 */
+
 int get_distance(t_list **stack, int value, int size)
 {
     t_list *first;
@@ -87,6 +89,7 @@ int count_arrays(char **arr)
     }
     return (count);
 }
+
 int check_overflow(char *str)
 {
     int i;
