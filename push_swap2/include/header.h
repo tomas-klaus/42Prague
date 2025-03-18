@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:22:43 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/18 16:58:28 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/18 17:38:09 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 int *parse_input(int argc, char **argv, int *size);
 
-void simple_sort(t_list **stack_a, t_list **stack_b, int size);
+
 
 /* helpers */
 int get_distance(t_list **stack, int value, int size);
@@ -36,9 +36,19 @@ int check_overflow(char *str);
 int get_min(t_list **stack);
 
 /* helpers2 */
-int closest_top(t_list *stack, int pivot, int *top);
-int closest_bot(t_list *stack, int pivot);
 int ft_abs(int num);
+void get_both_distances(t_list **stack, int value, int *r_dist, int *rr_dist);
+int get_max(t_list **stack);
+int get_next_lowest(t_list **stack, int num);
+int get_next_higher(t_list **stack, int num);
+
+
+/* helpers3 */
+int ft_min(int a, int b);
+int cost_compute(int i, int j);
+void rotate_distance(t_list **stack, int target, int which_stack);
+
+
 
 /* stack */
 int init_stack(t_list **stack_a, t_list **stack_b, int *arr,
@@ -67,14 +77,13 @@ void rrr(t_list **stack_a, t_list **stack_b);
 /* simple */
 void sort2(t_list **stack);
 void sort3(t_list **stack);
+void simple_sort(t_list **stack_a, t_list **stack_b, int size);
 
+/* execute moves */
+void execute_moves(t_list **stack_a, t_list **stack_b, int *moves, int *num);
 
+void turk_sort(t_list **stack_a, t_list **stack_b, int full_size);
+void b_cost(t_list **stack_b, int num_a, int *moves);
 
-/* quicksort */
-void rotate_distance(t_list **stack, int target, int which_stack);
-void quick_sort(t_list **stack_a, t_list **stack_b, int size);
-
-/* push_back */
-void push_back(t_list **stack_a, t_list **stack_b, int size_a, int size_b);
 
 #endif

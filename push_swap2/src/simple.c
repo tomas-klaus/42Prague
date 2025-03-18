@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:55:58 by tklaus            #+#    #+#             */
-/*   Updated: 2025/03/16 22:31:36 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/18 17:15:31 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,27 @@ push the number to stack B
 sort3 the remaining numbers in stack A
 push the smallest number back to stack A
 */
-void sort4(t_list **stack_a, t_list **stack_b, int size)
+void sort4(t_list **stack_a, t_list **stack_b)
 {
     int min;
 
     min = get_min(stack_a);
     
-    rotate_distance(stack_a,min,size,1);
+    rotate_distance(stack_a,min,1);
     pb(stack_a, stack_b);
     sort3(stack_a);
     pa(stack_a, stack_b);
 }
 
-void sort5(t_list **stack_a, t_list **stack_b, int size)
+void sort5(t_list **stack_a, t_list **stack_b)
 {
     int min;
 
     min = get_min(stack_a);
     
-    rotate_distance(stack_a,min,size,1);
+    rotate_distance(stack_a,min,1);
     pb(stack_a, stack_b);
-    sort4(stack_a, stack_b, 4);
+    sort4(stack_a, stack_b);
     pa(stack_a, stack_b);
 }
 
@@ -82,7 +82,7 @@ void simple_sort(t_list **stack_a, t_list **stack_b, int size)
     else if (size == 3)
         sort3(stack_a);
     else if (size == 4)
-        sort4(stack_a, stack_b, size);
+        sort4(stack_a, stack_b);
     else if (size == 5)
-        sort5(stack_a, stack_b, size);
+        sort5(stack_a, stack_b);
 }

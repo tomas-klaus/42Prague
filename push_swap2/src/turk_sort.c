@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:41:52 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/18 16:59:31 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/18 17:31:17 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,103 +54,12 @@
 - rotate_distance(stack_a, 0)
 */
 
-void get_both_distances(t_list **stack, int value, int *r_dist, int *rr_dist)
-{
-    t_list *first;
-    int dist;
-    int size;
-
-    size = ft_lstsize(first);
-    dist = 0;
-    first = *stack;
-
-    while (first && (first->content != value))
-    {
-        first = first->next;
-        dist++;
-    }
-    if (!first)
-        return size;
-    r_dist = dist;
-    rr_dist = dist - size;
-}
-
-int get_max(t_list **stack)
-{
-    int highest;
-    t_list *current;
-
-    if (!*stack)
-        return (0); // or some error value
-
-    current = *stack;
-    highest = current->content;
-    while (current)
-    {
-        if (current->content > highest)
-            highest = current->content;
-        current = current->next;
-    }
-    return (highest);
-}
-
-int get_next_lowest(t_list **stack, int num)
-{
-    int second_lowest;
-    int lowest;
-    t_list *current;
-
-    current = *stack;
-    lowest = get_min(stack);
-    second_lowest = get_max(stack);
-
-    while (current)
-    {
-        if (current->content > lowest && current->content < num && current->content < second_lowest)
-            second_lowest = current->content;
-        current = current->next;
-    }
-    return (second_lowest);
-}
-
-int get_next_higher(t_list *stack, int num)
-{
-    int next_higher;
-    int max;
-
-    max = get_max(stack);
-    next_higher = max;
-
-    while (stack)
-    {
-        if (stack->content > num && stack->content < next_higher)
-            next_higher = stack->content;
-        stack = stack->next;
-    }
-    return (next_higher == max) ? num : next_higher;
-}
-
 void b_cost(t_list **stack_b, int num_a, int *moves)
 {
-    int size_b;
-
-    size_b = ft_lstsize(stack_b);
     if ((num_a < get_min(stack_b)) || (num_a > get_max(stack_b)))
         get_both_distances(stack_b, get_max(stack_b), moves[2], moves[3]);
     else
         get_both_distances(stack_b, get_next_lowest(stack_b, num_a), moves[2], moves[3]);
-}
-
-int ft_min(int a, int b)
-{
-    return (a < b) ? a : b;
-}
-int cost_compute(int *i, int *j)
-{
-    if ((*i >= 0 && *j >= 0) || (*i < 0 && *j < 0))
-        return ft_abs(*i - *j) + ft_min(ft_abs(*i), ft_abs(*j));
-    else
-        return ft_abs(*i) + ft_abs(*j);
 }
 
 int compare_costs(int *moves, int size_a)
@@ -193,104 +102,18 @@ int calculate_cost(t_list **stack_a, t_list **stack_b, int size_a, int *moves)
     }
     return num;
 }
-int which_case(int *moves)
+
+void push_back_to_b(t_list **stack_a, t_list **stack_b)
 {
-    int cost;
-    int case_which;
-
-    case_which = 0;
-    cost = INT_MAX;
-    if (cost_compute(moves[0], moves[2]) < cost)
-    {
-        cost = cost_compute(moves[0], moves[2]);
-        case_which = 1;
-    }
-    if (cost_compute(moves[0], moves[3]) < cost)
-    {
-        cost = cost_compute(moves[0], moves[3]);
-        case_which = 2;
-    }
-    if (cost_compute(moves[1], moves[2]) < cost)
-    {
-        cost = cost_compute(moves[1], moves[2]);
-        case_which = 3;
-    }
-    if (cost_compute(moves[1], moves[3]) < cost)
-        case_which = 4;
-    return case_which;
-}
-
-void rotate_final(t_list **stack_a, t_list **stack_b, int *moves, int r_times)
-{
-    while (r_times > 0)
-    {
-        rr(stack_a, stack_b);
-        r_times--;
-    }
-    while (r_times < 0)
-    {
-        rrr(stack_a, stack_b);
-        r_times++;
-    }
-}
-int rotate_moves(t_list **stack_a, t_list **stack_b, int *moves, int *num)
-{
-    int case_which;
-    int r_times;
-    int size_a;
-    int size_b;
-    case_which = which_case(moves);
-
-    size_a = ft_lstsize(stack_a);
-    size_b = ft_lstsize(stack_b);
-
-    if (case_which == 1)
-    {
-        r_times = ft_min(ft_abs(moves[0]), ft_abs(moves[2]));
-        rotate_final(stack_a, stack_b, r_times, moves);
-    }
-    else if (case_which == 4)
-    {
-        r_times = min(ft_abs(moves[1]), ft_abs(moves[3])) * -1;
-    }
-    rotate_distance(stack_a, num[0], 1);
-    rotate_distance(stack_b, num[1], 0);
-    return r_times;
-}
-
-void execute_moves(t_list **stack_a, t_list **stack_b, int *moves, int *num)
-{
-    int r_times;
-
-    moves[1] = moves[0] - ft_lstsize(stack_a);
-
-    while ((*stack_a)->content != num[0])
-    {
-        moves[0]++;
-        (*stack_a) = (*stack_a)->next;
-    }
-    if ((num[0] < get_min(*stack_b)) || (num[0] > get_max(*stack_a)))
-        num[1] = get_max(*stack_b);
-    else
-        num[1] = get_next_lowest(stack_b, num[0]);
-
-    b_cost(stack_b, num[0], moves);
-    r_times = rotate_moves(stack_a, stack_b, moves, num);
-    pb(stack_a, stack_b);
-}
-push_back_to_b(t_list **stack_a, t_list **stack_b)
-{
-    t_list *first_b;
-    first_b = stack_b;
 
     int first;
     int num;
     while (*stack_a)
     {
         first = (*stack_b)->content;
-        num = get_next_higher(stack_b, first);
+        num = get_next_higher(*stack_b, first);
         rotate_distance(stack_b, num, 1);
-        pa(stack_a,stack_b);
+        pa(stack_a, stack_b);
     }
 }
 
@@ -305,7 +128,7 @@ void turk_sort(t_list **stack_a, t_list **stack_b, int full_size)
     pb(stack_a, stack_b);
     pb(stack_a, stack_b);
 
-    int *moves[4];
+    int moves[4];
     moves[0] = 0;
     moves[1] = 0;
     moves[2] = 0;
