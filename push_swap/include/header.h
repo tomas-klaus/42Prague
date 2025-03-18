@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:22:43 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/16 14:19:05 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/17 15:45:28 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ int ft_sort(int *sorted_arr, int count);
 int count_arrays(char **arr);
 int check_overflow(char *str);
 int get_min(t_list **stack);
+
+/* helpers2 */
+int closest_top(t_list *stack, int pivot, int *top);
+int closest_bot(t_list *stack, int pivot);
+int ft_abs(int num);
 
 /* stack */
 int init_stack(t_list **stack_a, t_list **stack_b, int *arr,
@@ -63,7 +68,10 @@ void sort2(t_list **stack);
 void sort3(t_list **stack);
 
 /* quicksort */
-void rotate_distance(t_list **stack, int min, int size);
+void rotate_distance(t_list **stack, int min, int size, int which_stack);
 void quick_sort(t_list **stack_a, t_list **stack_b, int size);
+
+/* push_back */
+void push_back(t_list **stack_a, t_list **stack_b, int size_a, int size_b);
 
 #endif
