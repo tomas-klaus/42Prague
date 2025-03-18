@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:59:46 by tklaus            #+#    #+#             */
-/*   Updated: 2025/03/17 17:48:12 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/18 17:03:49 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 stack_a is 1
 stack_b is 0
 */
-void rotate_distance(t_list **stack, int target, int size, int which_stack)
+void rotate_distance(t_list **stack, int target, int which_stack)
 {
+    int size;
+    size = ft_lstsize(stack);
     int dist = get_distance(stack, target, size);
 
     // Optimize rotations
@@ -99,7 +101,7 @@ int push_smaller(t_list **stack_a, t_list **stack_b, int size, int pivot)
         else
         {
             closest = closest_smaller(stack_a, pivot, size - j);
-            rotate_distance(stack_a, closest, size - j, 1);
+            rotate_distance(stack_a, closest, 1);
         }
         i++;
         /*  printf("j: %d\n", j);

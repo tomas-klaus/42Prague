@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:22:51 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/18 10:40:55 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/18 17:00:15 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static void sort_stack(t_list **stack_a, t_list **stack_b, int size)
 	if (size <= 5)
 		simple_sort(stack_a, stack_b, size);
 	else
-		quick_sort(stack_a, stack_b, size);
-		radix_sort(stack_a, stack_b, size);
+		//quick_sort(stack_a, stack_b, size);
+		turk_sort(stack_a, stack_b, size);
 	printf("[S T A C K - A]\n");
 	print_stack(stack_a);
 	/* printf("[S T A C K - B]\n");

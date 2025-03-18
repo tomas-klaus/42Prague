@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:22:43 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/18 14:34:55 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/18 16:58:28 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void sort3(t_list **stack);
 
 
 /* quicksort */
-void rotate_distance(t_list **stack, int min, int size, int which_stack);
+void rotate_distance(t_list **stack, int target, int which_stack);
 void quick_sort(t_list **stack_a, t_list **stack_b, int size);
 
 /* push_back */

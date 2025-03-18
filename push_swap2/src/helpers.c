@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:09:41 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/17 23:33:57 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/18 16:55:34 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int get_min(t_list **stack)
     }
     return (min);
 }
+
+
 
 /*
 get the distance of the requested node from the top

@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:41:52 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/18 14:54:35 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/18 16:59:31 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,67 +75,70 @@ void get_both_distances(t_list **stack, int value, int *r_dist, int *rr_dist)
     rr_dist = dist - size;
 }
 
-int get_min(t_list *stack)
-{
-    int lowest;
-
-    if (!stack)
-        return (0); // or some error value
-
-    lowest = stack->content;
-    while (stack)
-    {
-        if (stack->content < lowest)
-            lowest = stack->content;
-        stack = stack->next;
-    }
-    return (lowest);
-}
-
-int get_max(t_list *stack)
+int get_max(t_list **stack)
 {
     int highest;
+    t_list *current;
 
-    if (!stack)
+    if (!*stack)
         return (0); // or some error value
 
-    highest = stack->content;
-    while (stack)
+    current = *stack;
+    highest = current->content;
+    while (current)
     {
-        if (stack->content > highest)
-            highest = stack->content;
-        stack = stack->next;
+        if (current->content > highest)
+            highest = current->content;
+        current = current->next;
     }
     return (highest);
 }
 
-int get_next_lowest(t_list *stack, int num)
+int get_next_lowest(t_list **stack, int num)
 {
     int second_lowest;
     int lowest;
+    t_list *current;
 
+    current = *stack;
     lowest = get_min(stack);
     second_lowest = get_max(stack);
 
-    while (stack)
+    while (current)
     {
-        if (stack->content > lowest && stack->content < num && stack->content < second_lowest)
-            second_lowest = stack->content;
-        stack = stack->next;
+        if (current->content > lowest && current->content < num && current->content < second_lowest)
+            second_lowest = current->content;
+        current = current->next;
     }
     return (second_lowest);
 }
 
-void b_cost(t_list **stack_b, int num_a, int *r_dist, int *rr_dist)
+int get_next_higher(t_list *stack, int num)
 {
-    t_list *first_b;
+    int next_higher;
+    int max;
+
+    max = get_max(stack);
+    next_higher = max;
+
+    while (stack)
+    {
+        if (stack->content > num && stack->content < next_higher)
+            next_higher = stack->content;
+        stack = stack->next;
+    }
+    return (next_higher == max) ? num : next_higher;
+}
+
+void b_cost(t_list **stack_b, int num_a, int *moves)
+{
     int size_b;
 
-    size_b = ft_lstsize(first_b);
-    if ((num_a < get_min(first_b)) || (num_a > get_max(first_b)))
-        get_both_distances(stack_b, get_max(first_b), &r_dist, &rr_dist);
+    size_b = ft_lstsize(stack_b);
+    if ((num_a < get_min(stack_b)) || (num_a > get_max(stack_b)))
+        get_both_distances(stack_b, get_max(stack_b), moves[2], moves[3]);
     else
-        get_both_distances(stack_b, get_next_lowest(first_b, num_a), &r_dist, &rr_dist);
+        get_both_distances(stack_b, get_next_lowest(stack_b, num_a), moves[2], moves[3]);
 }
 
 int ft_min(int a, int b)
@@ -150,102 +153,74 @@ int cost_compute(int *i, int *j)
         return ft_abs(*i) + ft_abs(*j);
 }
 
-int compare_costs(int *ra_moves_a, int *rb_moves_b, int *rrb_moves_b, int size_a)
+int compare_costs(int *moves, int size_a)
 {
-    int rra_moves_a;
-    rra_moves_a = ra_moves_a - size_a;
+
+    moves[1] = moves[0] - size_a;
 
     int cost;
-    int min_cost;
 
     cost = size_a;
 
-    if (cost_compute(&ra_moves_a, &rb_moves_b) < cost)
-        cost = cost_compute(&ra_moves_a, &rb_moves_b);
-    if (cost_compute(&ra_moves_a, &rrb_moves_b) < cost)
-        cost = cost_compute(&ra_moves_a, &rrb_moves_b);
-    if (cost_compute(&rra_moves_a, &rb_moves_b) < cost)
-        cost = cost_compute(&rra_moves_a, &rb_moves_b);
-    if (cost_compute(&rra_moves_a, &rrb_moves_b) < cost)
-        cost = cost_compute(&rra_moves_a, &rrb_moves_b);
-
-    /* if ((ra_moves_a >= 0 && rb_moves_b >= 0) || (ra_moves_a < 0 && rb_moves_b < 0))
-        cost = ft_abs(ra_moves_a - rb_moves_b) + ft_min(ft_abs(ra_moves_a), ft_abs(rb_moves_b));
-    else
-        cost = ft_abs(ra_moves_a) + ft_abs(rb_moves_b);
-
-    if ((ra_moves_a >= 0 && rrb_moves_b >= 0) || (ra_moves_a < 0 && rrb_moves_b < 0))
-        cost = ft_min(cost, ft_abs(ra_moves_a - rrb_moves_b) + ft_min(ft_abs(ra_moves_a), ft_abs(rrb_moves_b)));
-    else
-        cost = ft_min(cost, ft_abs(ra_moves_a) + ft_abs(rrb_moves_b)); */
+    if (cost_compute(moves[0], moves[2]) < cost)
+        cost = cost_compute(moves[0], moves[2]);
+    if (cost_compute(moves[0], moves[3]) < cost)
+        cost = cost_compute(moves[0], moves[3]);
+    if (cost_compute(moves[1], moves[2]) < cost)
+        cost = cost_compute(moves[1], moves[2]);
+    if (cost_compute(moves[1], moves[3]) < cost)
+        cost = cost_compute(moves[1], moves[3]);
 
     return cost;
 }
 
-int calculate_cost(t_list **stack_a, t_list **stack_b, int size_a)
+int calculate_cost(t_list **stack_a, t_list **stack_b, int size_a, int *moves)
 {
-    int ra_moves_a;
-    int rb_moves_b;
-    int rrb_moves_b;
     int num;
     int cost;
 
     cost = size_a;
-    ra_moves_a = 0;
+
     num = 0;
 
     while (*stack_a)
     {
-        b_cost(stack_b, (*stack_a)->content, &rb_moves_b, &rrb_moves_b);
-        if (compare_costs(ra_moves_a, rb_moves_b, rrb_moves_b, size_a) < cost)
+        b_cost(stack_b, (*stack_a)->content, moves);
+        if (compare_costs(moves, size_a) < cost)
             num = (*stack_a)->content;
         (*stack_a) = (*stack_a)->next;
-        ra_moves_a++;
+        moves[0]++;
     }
     return num;
 }
-int which_case(int *ra_moves_a, int *rra_moves_a, int *rb_moves_b, int *rrb_moves_b)
+int which_case(int *moves)
 {
     int cost;
     int case_which;
 
     case_which = 0;
     cost = INT_MAX;
-    if (cost_compute(&ra_moves_a, &rb_moves_b) < cost)
+    if (cost_compute(moves[0], moves[2]) < cost)
     {
-        cost = cost_compute(&ra_moves_a, &rb_moves_b);
+        cost = cost_compute(moves[0], moves[2]);
         case_which = 1;
     }
-    if (cost_compute(&ra_moves_a, &rrb_moves_b) < cost)
+    if (cost_compute(moves[0], moves[3]) < cost)
     {
-        cost = cost_compute(&ra_moves_a, &rrb_moves_b);
+        cost = cost_compute(moves[0], moves[3]);
         case_which = 2;
     }
-    if (cost_compute(&rra_moves_a, &rb_moves_b) < cost)
+    if (cost_compute(moves[1], moves[2]) < cost)
     {
-        cost = cost_compute(&rra_moves_a, &rb_moves_b);
+        cost = cost_compute(moves[1], moves[2]);
         case_which = 3;
     }
-    if (cost_compute(&rra_moves_a, &rrb_moves_b) < cost)
+    if (cost_compute(moves[1], moves[3]) < cost)
         case_which = 4;
     return case_which;
 }
-int rotate_moves(int *ra_moves_a, int *rra_moves_a, int *rb_moves_b, int *rrb_moves_b)
-{
-    int case_which;
-    int r_times;
-    case_which = which_case(ra_moves_a, rra_moves_a, rb_moves_b, rrb_moves_b);
 
-    if (case_which == 1)
-        r_times = ft_min(ft_abs(*ra_moves_a), ft_abs(*rb_moves_b));
-    else if (case_which == 4)
-        r_times = min(ft_abs(*rra_moves_a), ft_abs(*rrb_moves_b)) * -1;
-    else
-        r_times = INT_MAX;
-    return r_times;
-}
-
-void rotate_final(t_list **stack_a, t_list **stack_b, int r_times)
+void rotate_final(t_list **stack_a, t_list **stack_b, int *moves, int r_times)
 {
     while (r_times > 0)
     {
@@ -258,45 +233,95 @@ void rotate_final(t_list **stack_a, t_list **stack_b, int r_times)
         r_times++;
     }
 }
-void execute_moves(t_list **stack_a, t_list **stack_b, int size_a, int num_a)
+int rotate_moves(t_list **stack_a, t_list **stack_b, int *moves, int *num)
 {
-    int ra_moves_a;
-    int rb_moves_b;
-    int rrb_moves_b;
-    int rra_moves_a;
-    int num_b;
-
+    int case_which;
     int r_times;
+    int size_a;
+    int size_b;
+    case_which = which_case(moves);
 
-    rra_moves_a = ra_moves_a - size_a;
-    ra_moves_a = 0;
-    while ((*stack_a)->content != num_a)
+    size_a = ft_lstsize(stack_a);
+    size_b = ft_lstsize(stack_b);
+
+    if (case_which == 1)
     {
-        ra_moves_a++;
-        (*stack_a) = (*stack_a)->next;
+        r_times = ft_min(ft_abs(moves[0]), ft_abs(moves[2]));
+        rotate_final(stack_a, stack_b, r_times, moves);
     }
-    if ((num_a < get_min(*stack_b)) || (num_a > get_max(*stack_a)))
-        num_b = get_max(*stack_b);
-    else
-        num_b = get_next_lowest(stack_b, num_a);
-
-    b_cost(stack_b, num_a, &rb_moves_b, &rrb_moves_b);
-    r_times = rotate_moves(ra_moves_a, rra_moves_a, rb_moves_b, rrb_moves_b);
-    rotate_final(stack_a, stack_b, r_times)
+    else if (case_which == 4)
+    {
+        r_times = min(ft_abs(moves[1]), ft_abs(moves[3])) * -1;
+    }
+    rotate_distance(stack_a, num[0], 1);
+    rotate_distance(stack_b, num[1], 0);
+    return r_times;
 }
 
+void execute_moves(t_list **stack_a, t_list **stack_b, int *moves, int *num)
+{
+    int r_times;
+
+    moves[1] = moves[0] - ft_lstsize(stack_a);
+
+    while ((*stack_a)->content != num[0])
+    {
+        moves[0]++;
+        (*stack_a) = (*stack_a)->next;
+    }
+    if ((num[0] < get_min(*stack_b)) || (num[0] > get_max(*stack_a)))
+        num[1] = get_max(*stack_b);
+    else
+        num[1] = get_next_lowest(stack_b, num[0]);
+
+    b_cost(stack_b, num[0], moves);
+    r_times = rotate_moves(stack_a, stack_b, moves, num);
+    pb(stack_a, stack_b);
+}
+push_back_to_b(t_list **stack_a, t_list **stack_b)
+{
+    t_list *first_b;
+    first_b = stack_b;
+
+    int first;
+    int num;
+    while (*stack_a)
+    {
+        first = (*stack_b)->content;
+        num = get_next_higher(stack_b, first);
+        rotate_distance(stack_b, num, 1);
+        pa(stack_a,stack_b);
+    }
+}
+
+/*
+moves[0] = ra
+moves[1] = rra
+moves[2] = rb
+moves[3] = rrb
+*/
 void turk_sort(t_list **stack_a, t_list **stack_b, int full_size)
 {
     pb(stack_a, stack_b);
     pb(stack_a, stack_b);
 
-    int num;
-    num = 0;
+    int *moves[4];
+    moves[0] = 0;
+    moves[1] = 0;
+    moves[2] = 0;
+    moves[3] = 0;
 
-    while (stack_b)
+    int num[2];
+    num[0] = 0;
+    num[1] = 0;
+
+    while (full_size > 3)
     {
-        num = calculate_cost(stack_a, stack_b, full_size);
-        execute_moves(stack_a, stack_b, full_size, num);
+        num[0] = calculate_cost(stack_a, stack_b, full_size, moves);
+        execute_moves(stack_a, stack_b, moves, num);
         full_size--;
     }
+    sort3(stack_a);
+    push_back_to_b(stack_a, stack_b);
+    rotate_distance(stack_a, 0, 1);
 }
