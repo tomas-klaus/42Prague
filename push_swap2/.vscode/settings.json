@@ -2,7 +2,7 @@
   "files.associations": {
     "header.h": "c"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "keyhr.42-c-format",
   "editor.formatOnSave": true,
   "C_Cpp.formatting": "default",
   "[c]": {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 21:20:51 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/18 17:35:41 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/18 20:36:18 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int get_next_higher(t_list **stack, int num)
 
     max = get_max(stack);
     next_higher = max;
+    if (num > max)
+        return (get_min(stack));
 
     t_list *current;
 
@@ -96,8 +98,13 @@ int get_next_higher(t_list **stack, int num)
     while (current)
     {
         if (current->content > num && current->content < next_higher)
+        {
+
             next_higher = current->content;
+        }
+
         current = current->next;
     }
-    return (next_higher == max) ? num : next_higher;
+
+    return next_higher;
 }
