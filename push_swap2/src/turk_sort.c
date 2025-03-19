@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   turk_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 10:41:52 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/18 21:00:19 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:46:39 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,25 +73,24 @@ void push_back_to_b(t_list **stack_a, t_list **stack_b)
         rotate_distance(stack_a, num, 1);
         pa(stack_a, stack_b);
 
-        /* printf("stack_a: ");
+        printf("stack_a: ");
         print_stack(stack_a);
 
         printf("stack_b: ");
-        print_stack(stack_b); */
-
+        print_stack(stack_b);
     }
 }
 
 int compare_costs(int *moves, int size_a)
 {
 
-    moves[1] = moves[0] - size_a;
+    moves[1] = (size_a - moves[0]) * -1;
+    
 
     int cost;
 
     cost = size_a;
-    
-    
+
     if (cost_compute(moves[0], moves[2]) < cost)
         cost = cost_compute(moves[0], moves[2]);
     if (cost_compute(moves[0], moves[3]) < cost)
@@ -100,14 +99,14 @@ int compare_costs(int *moves, int size_a)
         cost = cost_compute(moves[1], moves[2]);
     if (cost_compute(moves[1], moves[3]) < cost)
         cost = cost_compute(moves[1], moves[3]);
-    printf(" %d\n", cost);
-    printf("size_a: %d\n", size_a);
+    // printf(" %d\n", cost);
     return cost;
 }
 
 void b_cost(t_list **stack_b, int num_a, int *moves)
 {
-    printf("cost for num: %d ->", num_a);
+    /* printf("ra: %d, rra: %d, rb: %d, rrb: %d\n", moves[0], moves[1], moves[2], moves[3]);
+    printf("cost for num: %d ->", num_a); */
     if ((num_a < get_min(stack_b)) || (num_a > get_max(stack_b)))
     {
         get_both_distances(stack_b, get_max(stack_b), &moves[2], &moves[3]);
@@ -127,6 +126,7 @@ int calculate_cost(t_list **stack_a, t_list **stack_b, int size_a, int *moves)
     cost = size_a;
 
     num = 0;
+    moves[0] = 0;
 
     while (first_a)
     {
@@ -135,11 +135,11 @@ int calculate_cost(t_list **stack_a, t_list **stack_b, int size_a, int *moves)
         {
             cost = compare_costs(moves, size_a);
             num = first_a->content;
-            //printf("num: %d\n", num);
+            // printf("num: %d\n", num);
         }
         first_a = first_a->next;
         moves[0]++;
-        //print_stack(stack_a);
+        // print_stack(stack_a);
     }
     return num;
 }
@@ -168,21 +168,21 @@ void turk_sort(t_list **stack_a, t_list **stack_b, int full_size)
 
     while (full_size > 3)
     {
-        printf("stack_a: ");
+        /* printf("stack_a: ");
         print_stack(stack_a);
 
         printf("stack_b: ");
-        print_stack(stack_b);
+        print_stack(stack_b); */
         num[0] = calculate_cost(stack_a, stack_b, full_size, moves);
-        //printf("chose number %d\n", num[0]);
+        // printf("chose number %d\n", num[0]);
         execute_moves(stack_a, stack_b, moves, num);
         full_size--;
     }
-   /*  printf("stack_a: ");
-    print_stack(stack_a);
+    /*  printf("stack_a: ");
+     print_stack(stack_a);
 
-    printf("stack_b: ");
-    print_stack(stack_b); */
+     printf("stack_b: ");
+     print_stack(stack_b); */
     sort3(stack_a);
     printf("-------------pushing back----------\n");
     push_back_to_b(stack_a, stack_b);

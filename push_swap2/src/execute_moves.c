@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_moves.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:08:43 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/18 20:26:23 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:45:03 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,20 @@ void rotate_moves(t_list **stack_a, t_list **stack_b, int *moves, int *num)
 
     if (case_which == 1)
     {
+        //printf("rotating both\n");
         r_times = ft_min(ft_abs(moves[0]), ft_abs(moves[2]));
         rotate_final(stack_a, stack_b, r_times);
+        
     }
     else if (case_which == 4)
     {
+        //printf("rotating both\n");
         r_times = ft_min(ft_abs(moves[1]), ft_abs(moves[3])) * -1;
         rotate_final(stack_a, stack_b, r_times);
+        
+
     }
+    //printf("rotating separately\n");
     rotate_distance(stack_a, num[0], 1);
     rotate_distance(stack_b, num[1], 0);
     
