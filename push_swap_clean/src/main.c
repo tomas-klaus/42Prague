@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:22:51 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/19 21:11:14 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/19 21:25:12 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ optimize moves
 
 output operations
 
-------------------------------------------------------------------------------------
+--------------------------------------------------------------
 implement sorting operations (sa, sb, ra ...)
 
 sorting alghorithm QUICKSORT
@@ -75,28 +75,16 @@ void	free_int_2d_array(int **array, int size)
 
 static void	sort_stack(t_list **stack_a, t_list **stack_b, int size)
 {
-	// static int not_sorted = 0;
 	if (is_sorted(stack_a))
 	{
 		free_stack(stack_a);
 		free_stack(stack_b);
 		return ;
 	}
-	// printf("----------Sorting stack-----------\n");
 	if (size <= 5)
 		simple_sort(stack_a, stack_b, size);
 	else
-		// quick_sort(stack_a, stack_b, size);
 		turk_sort(stack_a, stack_b, size);
-	/* printf("[S T A C K - A]\n");
-	print_stack(stack_a); */
-	/* printf("[S T A C K - B]\n");
-	print_stack(stack_b); */
-	/* if (is_sorted(stack_a))
-		printf("SORTED\n"); */
-	/* else
-		not_sorted++;
-	printf("NOT SORTED: %d\n\n", not_sorted); */
 	free_stack(stack_a);
 	free_stack(stack_b);
 }

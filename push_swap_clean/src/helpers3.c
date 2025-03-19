@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:06:11 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/19 19:27:28 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/19 21:26:15 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	ft_min(int a, int b)
 {
-	return ((a < b) ? a : b);
+	if (a < b)
+		return (a);
+	else
+		return (b);
 }
 
 int	cost_compute(int i, int j)
@@ -24,6 +27,7 @@ int	cost_compute(int i, int j)
 	else
 		return (ft_abs(i) + ft_abs(j));
 }
+
 void	rotate_distance(t_list **stack, int target, int which_stack)
 {
 	int	size;
@@ -31,7 +35,6 @@ void	rotate_distance(t_list **stack, int target, int which_stack)
 
 	size = ft_lstsize(*stack);
 	dist = get_distance(stack, target, size);
-	// Optimize rotations
 	while (dist != 0)
 	{
 		if (dist > 0)
@@ -55,10 +58,10 @@ void	rotate_distance(t_list **stack, int target, int which_stack)
 
 void	reset_moves(int *moves)
 {
-    moves[4] = INT_MAX;
-    moves[5] = INT_MAX;
-    moves[6] = INT_MAX;
-    moves[7] = INT_MAX;
+	moves[4] = INT_MAX;
+	moves[5] = INT_MAX;
+	moves[6] = INT_MAX;
+	moves[7] = INT_MAX;
 }
 
 void	get_best_moves(int cost, int *moves)

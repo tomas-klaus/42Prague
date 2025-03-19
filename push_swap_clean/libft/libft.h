@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 12:35:40 by tklaus            #+#    #+#             */
-/*   Updated: 2025/03/15 20:32:28 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/19 21:27:25 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void				ft_putnbr_fd(int n, int fd);
 
 typedef struct s_list
 {
-	int			content;
+	int				content;
 	struct s_list	*next;
 }					t_list;
 
@@ -68,6 +68,5 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(int));
 void				ft_lstclear(t_list **lst, void (*del)(int));
 void				ft_lstiter(t_list *lst, void (*f)(int));
-t_list				*ft_lstmap(t_list *lst, int(*f)(int),
-						void (*del)(int));
+t_list				*ft_lstmap(t_list *lst, int (*f)(int), void (*del)(int));
 #endif

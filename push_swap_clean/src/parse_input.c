@@ -6,15 +6,9 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:37:12 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/19 21:07:06 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/19 21:29:49 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-/*
-i need a loop that cycles through the whole string or the args, checks for any
-unwanted characters and converts all the characters to ints and stores them in an array
-which is then sorted and the original values are replaced with their ranks in the sorted array
-*/
 
 #include "../include/header.h"
 
@@ -57,7 +51,6 @@ int	fill_array(int *arr, int argc, char **argv)
 
 	i = 1;
 	k = 0;
-	
 	while (i <= argc - 1)
 	{
 		j = 0;
@@ -115,7 +108,6 @@ int	map_ranks(int *arr, int count)
 	}
 	if (ft_sort(sorted_arr, count))
 	{
-		printf("Error: duplicate numbers\n");
 		free(sorted_arr);
 		return (1);
 	}
@@ -136,26 +128,11 @@ int	*parse_input(int argc, char **argv, int *size)
 	{
 		count += check_and_count(argv[i]);
 		if (!check_and_count(argv[i]))
-		{
-			printf("Error: invalid character\n");
 			return (NULL);
-		}
 		i++;
 	}
-	// printf("Arguments: %d, Size: %d\n", argc-1, count);
 	arr = malloc(count * sizeof(int));
-	if (fill_array(arr, argc, argv)){
-		free(arr);
-		return (NULL);}
-	/* printf("Array: ");
-	i = 0;
-	while (i < count)
-	{
-		printf("%d ", arr[i]);
-		i++;
-	}
-	printf("\n"); */
-	if (map_ranks(arr, count))
+	if (fill_array(arr, argc, argv) || map_ranks(arr, count))
 	{
 		free(arr);
 		return (NULL);
