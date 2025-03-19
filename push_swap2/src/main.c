@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:22:51 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/18 17:00:15 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/19 19:34:28 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,18 @@ static void sort_stack(t_list **stack_a, t_list **stack_b, int size)
 		free_stack(stack_b);
 		return;
 	}
-	printf("----------Sorting stack-----------\n");
+	//printf("----------Sorting stack-----------\n");
 	if (size <= 5)
 		simple_sort(stack_a, stack_b, size);
 	else
 		//quick_sort(stack_a, stack_b, size);
 		turk_sort(stack_a, stack_b, size);
-	printf("[S T A C K - A]\n");
-	print_stack(stack_a);
+	/* printf("[S T A C K - A]\n");
+	print_stack(stack_a); */
 	/* printf("[S T A C K - B]\n");
 	print_stack(stack_b); */
-	if (is_sorted(stack_a))
-		printf("SORTED\n");
+	/* if (is_sorted(stack_a))
+		printf("SORTED\n"); */
 	/* else
 		not_sorted++;
 	printf("NOT SORTED: %d\n\n", not_sorted); */
@@ -97,7 +97,7 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	init_stack(stack_a, stack_b, arr, size);
-	print_stack(stack_a);
+	//print_stack(stack_a);
 	free(arr);
 	sort_stack(stack_a, stack_b, size);
 

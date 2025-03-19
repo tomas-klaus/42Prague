@@ -6,6 +6,6 @@
   "editor.formatOnSave": true,
   "C_Cpp.formatting": "default",
   "[c]": {
-    "editor.defaultFormatter": "ms-vscode.cpptools"
+    "editor.defaultFormatter": "keyhr.42-c-format"
   }
 }
