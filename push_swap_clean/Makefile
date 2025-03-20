@@ -1,6 +1,6 @@
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
 
 # Path to the libft directory
 LIBFT_DIR = libft
@@ -10,13 +10,13 @@ LIBFT = $(LIBFT_DIR)/libft.a
 FT_PRINTF_DIR = ft_printf
 FT_PRINTF = $(FT_PRINTF_DIR)/libftprintf.a
 
-
 SRCS_DIR = src
 SRCS = $(SRCS_DIR)/main.c $(SRCS_DIR)/parse_input.c $(SRCS_DIR)/helpers.c $(SRCS_DIR)/turk_sort.c \
-	$(SRCS_DIR)/stack.c $(SRCS_DIR)/simple.c $(SRCS_DIR)/instructions.c $(SRCS_DIR)/instructions2.c \
-	$(SRCS_DIR)/instructions3.c $(SRCS_DIR)/helpers2.c $(SRCS_DIR)/helpers3.c $(SRCS_DIR)/execute_moves.c
+    $(SRCS_DIR)/stack.c $(SRCS_DIR)/simple.c $(SRCS_DIR)/instructions.c $(SRCS_DIR)/instructions2.c \
+    $(SRCS_DIR)/instructions3.c $(SRCS_DIR)/helpers2.c $(SRCS_DIR)/helpers3.c $(SRCS_DIR)/execute_moves.c
 
 OBJS = $(SRCS:.c=.o)
+DEPS = $(OBJS:.o=.d)
 
 # Rule to build the push_swap executable
 $(NAME): $(LIBFT) $(FT_PRINTF) $(OBJS)
@@ -34,12 +34,15 @@ $(FT_PRINTF):
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Include dependency files
+-include $(DEPS)
+
 # Default target to build everything (both server and client)
 all: $(NAME)
 
 # Clean up object files
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(DEPS)
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(FT_PRINTF_DIR) clean
 
