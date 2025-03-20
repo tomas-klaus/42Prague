@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 18:09:41 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/19 21:22:18 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:27:36 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,6 @@ int	check_overflow(char *str)
 	int			minus;
 	long long	result;
 
-	if (!str)
-		return (0);
 	result = 0;
 	i = 0;
 	minus = 0;

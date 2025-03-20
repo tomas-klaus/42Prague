@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:22:48 by tklaus            #+#    #+#             */
-/*   Updated: 2025/03/19 21:19:02 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:40:44 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	print_stack(t_list **stack)
 	current = *stack;
 	while (current != NULL)
 	{
-		printf("%d ", current->content);
+		ft_printf("%d ", current->content);
 		current = current->next;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
 
 void	fill_stack(t_list **stack_a, int *arr, int size)

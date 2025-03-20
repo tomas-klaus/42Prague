@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   instructions.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 18:37:29 by tklaus            #+#    #+#             */
-/*   Updated: 2025/03/19 21:28:22 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:40:05 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	pa(t_list **stack_to, t_list **stack_from)
 	ft_lstadd_front(stack_to, to);
 	*stack_from = from->next;
 	free(from);
-	printf("pa\n");
+	ft_printf("pa\n");
 }
 
 void	pb(t_list **stack_from, t_list **stack_to)
@@ -58,7 +58,7 @@ void	pb(t_list **stack_from, t_list **stack_to)
 	ft_lstadd_front(stack_to, to);
 	*stack_from = from->next;
 	free(from);
-	printf("pb\n");
+	ft_printf("pb\n");
 }
 
 void	rotate(t_list **stack)

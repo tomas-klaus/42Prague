@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_moves.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 17:08:43 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/19 21:24:32 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:44:49 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 int	which_case(t_list **stack_a, t_list **stack_b, int *moves, int *num)
 {
-	int	cost;
 	int	case_which;
 
 	case_which = 0;
-	cost = INT_MAX;
 	if ((*stack_a)->content == num[0] || (*stack_b)->content == num[1])
 	{
 		return (5);

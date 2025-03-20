@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:37:12 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/19 21:29:49 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:29:31 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ int	check_and_count(char *str)
 				|| str[i] == '+'))
 			return (0);
 		if ((str[i] == '+' || str[i] == '-') && !(str[i + 1] >= '0' && str[i
-				+ 1] <= '9'))
+					+ 1] <= '9'))
 			return (0);
 		if ((str[i] >= '0' && str[i] <= '9') && !(str[i + 1] == ' ' || (str[i
-					+ 1] >= '0' && str[i + 1] <= '9') || str[i + 1] == '\0'))
+						+ 1] >= '0' && str[i + 1] <= '9') || str[i
+					+ 1] == '\0'))
 			return (0);
 		i++;
 	}
@@ -58,7 +59,7 @@ int	fill_array(int *arr, int argc, char **argv)
 		while (arg_arr[j])
 		{
 			if (check_overflow(arg_arr[j]))
-				return (1);
+				return (check_overflow(arg_arr[j]));
 			arr[k] = ft_atoi(arg_arr[j]);
 			j++;
 			k++;

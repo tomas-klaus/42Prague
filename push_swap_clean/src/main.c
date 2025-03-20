@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:22:51 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/19 21:25:12 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/20 12:40:28 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	main(int argc, char **argv)
 	arr = parse_input(argc, argv, &size);
 	if (!arr)
 	{
-		printf("Error\n");
+		ft_printf("Error\n");
 		return (1);
 	}
 	stack_a = (t_list **)malloc(sizeof(t_list));
