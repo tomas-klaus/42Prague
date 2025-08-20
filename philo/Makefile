@@ -5,7 +5,10 @@ CFLAGS = -Wall -Wextra -Werror -g -MMD -MP
 OBJ_DIR = obj
 
 SRCS_DIR = src
-SRCS = $(SRCS_DIR)/main.c $(SRCS_DIR)/parsing.c $(SRCS_DIR)/exit.c
+SRCS = $(SRCS_DIR)/main.c \
+$(SRCS_DIR)/parsing.c \
+$(SRCS_DIR)/exit.c \
+$(SRCS_DIR)/init.c \
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
