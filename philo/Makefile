@@ -9,6 +9,7 @@ SRCS = $(SRCS_DIR)/main.c \
 $(SRCS_DIR)/parsing.c \
 $(SRCS_DIR)/exit.c \
 $(SRCS_DIR)/init.c \
+$(SRCS_DIR)/time.c \
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)

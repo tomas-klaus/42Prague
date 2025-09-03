@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:21:47 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/08/20 16:18:22 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/08/20 18:56:19 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,17 @@
 #define SUCCESS 1
 #define ERROR 0
 
-
 /******************************************************************************
  *                                 Structures                                  *
  ******************************************************************************/
 
- typedef struct s_philo
+typedef struct s_philo
 {
     int id;
     int fork[2];
     int times_ate;
 
-    //pthread_mutex_t meal_time_lock;
+    // pthread_mutex_t meal_time_lock;
 
     time_t last_meal;
 
@@ -56,9 +55,8 @@ typedef struct s_table
     t_philo *philos;
 } t_table;
 
-
-
-typedef struct {
+typedef struct
+{
     t_table *table;
     int id;
 } thread_data_t;
@@ -69,11 +67,16 @@ typedef struct {
 
 // parsing
 int parse_args(int argc, char **argv);
-int	ft_safe_atoi(const char *str, int *error);
+int ft_safe_atoi(const char *str, int *error);
 
 // init
 t_table init_structs(int argc, char **argv);
 
 // exit
 int msg(char *str, int exit_no);
+
+// time
+time_t get_time();
+time_t get_timestamp(t_table *table);
+
 #endif
