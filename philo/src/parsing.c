@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 12:03:21 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/08/13 11:07:31 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/09/15 19:55:50 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/header.h"
 
-int ft_isdigit(char c)
+int	ft_isdigit(char c)
 {
-    if (c >= '0' && c <= '9')
-        return (SUCCESS);
-    return (ERROR);
+	if (c >= '0' && c <= '9')
+		return (SUCCESS);
+	return (ERROR);
 }
 
 /**
@@ -50,31 +50,31 @@ int	ft_safe_atoi(const char *str, int *error)
 		*error = 1;
 	return ((int)(res * positive));
 }
-int parse_args(int argc, char **argv)
+
+int	parse_args(int argc, char **argv)
 {
-    int i = 1;
-    int j;
-    int num;
-    int error;
-    
-    while (i < argc)
-    {
-        error=0;
-        j = 0;
-        if (argv[i][j] == '\0' || (argv[i][j] == '-'))
-            return (msg("Error: Invalid argument\n", ERROR));
-        while (argv[i][j] != '\0')
-        {
-            if (!ft_isdigit(argv[i][j]))
-                return (msg("Error: Not a digit\n", ERROR));
-            j++;
-        }
-        num = ft_safe_atoi(argv[i],&error);
-        if (error)
-            return (msg("Error: Int overflow\n", ERROR));
-        if (num <= 0 && i != 5)
-            return (msg("Error: Argument has to be greater than 0\n", ERROR));
-        i++;
-    }
-    return (SUCCESS);
+	int	i;
+	int	j;
+	int	error;
+
+	i = 1;
+	while (i < argc)
+	{
+		error = 0;
+		j = 0;
+		if (argv[i][j] == '\0' || (argv[i][j] == '-'))
+			return (msg("Error: Invalid argument\n", ERROR));
+		while (argv[i][j] != '\0')
+		{
+			if (!ft_isdigit(argv[i][j]))
+				return (msg("Error: Not a digit\n", ERROR));
+			j++;
+		}
+		if (error)
+			return (msg("Error: Int overflow\n", ERROR));
+		if ((ft_safe_atoi(argv[i], &error)) <= 0 && i != 5)
+			return (msg("Error: Argument has to be greater than 0\n", ERROR));
+		i++;
+	}
+	return (SUCCESS);
 }

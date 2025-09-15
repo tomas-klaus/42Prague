@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:22:43 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/19 18:46:51 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/19 21:05:20 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,8 @@ void	execute_moves(t_list **stack_a, t_list **stack_b, int *moves, int *num);
 
 void	turk_sort(t_list **stack_a, t_list **stack_b, int full_size);
 void	b_cost(t_list **stack_b, int num_a, int *moves);
+
+int		free_2d_array(char **array);
+void	free_int_2d_array(int **array, int size);
 
 #endif

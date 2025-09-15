@@ -6,7 +6,7 @@
 /*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 18:28:27 by tklaus            #+#    #+#             */
-/*   Updated: 2024/10/03 15:23:36 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/03/19 20:12:47 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	innerarray(char **arr, int count, char const *s, char c)
 		i++;
 		start += len;
 	}
+	
 	return (1);
 }
 

@@ -44,11 +44,10 @@ re: fclean all
 
 # ThreadSanitizer build (for debugging threading issues)
 tsan: CFLAGS += -fsanitize=thread
-
 tsan: LDFLAGS += -fsanitize=thread
 
 tsan: clean
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(SRCS)
+	$(CC) $(CFLAGS) $(SRCS) $(LDFLAGS) -o $(NAME)
 	@echo "Built with ThreadSanitizer. Run ./philo as usual."
 
 .PHONY: all clean fclean re

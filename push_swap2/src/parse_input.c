@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
+/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 11:37:12 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/03/16 11:57:20 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/03/19 21:07:06 by tklaus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	check_and_count(char *str)
 	}
 	arr = ft_split(str, ' ');
 	count = count_arrays(arr);
-	free(arr);
+	free_2d_array(arr);
 	return (count);
 }
 
 /**
  * @brief Fills an array with parsed command line arguments
  */
-int	fill_array(int **arr, int argc, char **argv, int count)
+int	fill_array(int *arr, int argc, char **argv)
 {
 	char	**arg_arr;
 	int		i;
@@ -57,9 +57,7 @@ int	fill_array(int **arr, int argc, char **argv, int count)
 
 	i = 1;
 	k = 0;
-	*arr = malloc(count * sizeof(int));
-	if (!(*arr))
-		return (1);
+	
 	while (i <= argc - 1)
 	{
 		j = 0;
@@ -68,11 +66,12 @@ int	fill_array(int **arr, int argc, char **argv, int count)
 		{
 			if (check_overflow(arg_arr[j]))
 				return (1);
-			(*arr)[k] = ft_atoi(arg_arr[j]);
+			arr[k] = ft_atoi(arg_arr[j]);
 			j++;
 			k++;
 		}
 		i++;
+		free_2d_array(arg_arr);
 	}
 	return (0);
 }
@@ -143,12 +142,11 @@ int	*parse_input(int argc, char **argv, int *size)
 		}
 		i++;
 	}
-	//printf("Arguments: %d, Size: %d\n", argc-1, count);
+	// printf("Arguments: %d, Size: %d\n", argc-1, count);
 	arr = malloc(count * sizeof(int));
-	if (fill_array(&arr, argc, argv, count))
-	{
-		return (NULL);
-	}
+	if (fill_array(arr, argc, argv)){
+		free(arr);
+		return (NULL);}
 	/* printf("Array: ");
 	i = 0;
 	while (i < count)
@@ -158,7 +156,10 @@ int	*parse_input(int argc, char **argv, int *size)
 	}
 	printf("\n"); */
 	if (map_ranks(arr, count))
+	{
+		free(arr);
 		return (NULL);
+	}
 	*size = count;
 	return (arr);
 }
