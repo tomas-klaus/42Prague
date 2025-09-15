@@ -6,7 +6,7 @@
 /*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:21:47 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/08/20 18:56:19 by tomasklaus       ###   ########.fr       */
+/*   Updated: 2025/09/15 12:46:56 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_philo
     int fork[2];
     int times_ate;
 
-    // pthread_mutex_t meal_time_lock;
-
+    pthread_mutex_t times_ate_mutex;
+    pthread_mutex_t last_meal_mutex;
     time_t last_meal;
 
     pthread_t thread;
@@ -49,8 +49,13 @@ typedef struct s_table
     time_t sleep_time;
     time_t start_time;
     int must_eat_count;
+    int stop_flag;
 
+    pthread_mutex_t write_lock;
+    pthread_mutex_t stop_flag_mutex;
     pthread_mutex_t *fork_mutex;
+
+    pthread_t obs_thread;
 
     t_philo *philos;
 } t_table;
@@ -74,9 +79,18 @@ t_table init_structs(int argc, char **argv);
 
 // exit
 int msg(char *str, int exit_no);
+void cleanup(t_table table);
 
 // time
 time_t get_time();
 time_t get_timestamp(t_table *table);
+int philo_sleep(t_table table, time_t sleep_time, int id);
+void setup_times(t_table *table);
+
+//observer
+void *obs_loop(void *arg);
+
+//philo
+void *philo_loop(void *arg);
 
 #endif

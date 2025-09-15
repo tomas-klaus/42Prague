@@ -10,6 +10,8 @@ $(SRCS_DIR)/parsing.c \
 $(SRCS_DIR)/exit.c \
 $(SRCS_DIR)/init.c \
 $(SRCS_DIR)/time.c \
+$(SRCS_DIR)/philo.c \
+$(SRCS_DIR)/observer.c \
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 DEPS = $(OBJS:.o=.d)
@@ -39,5 +41,14 @@ fclean: clean
 
 # Rebuild everything from scratch
 re: fclean all
+
+# ThreadSanitizer build (for debugging threading issues)
+tsan: CFLAGS += -fsanitize=thread
+
+tsan: LDFLAGS += -fsanitize=thread
+
+tsan: clean
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(NAME) $(SRCS)
+	@echo "Built with ThreadSanitizer. Run ./philo as usual."
 
 .PHONY: all clean fclean re
