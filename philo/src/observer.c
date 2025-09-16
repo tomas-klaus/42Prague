@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   observer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:01:38 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/09/15 19:58:25 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/09/16 10:36:27 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ int	check_times_ate(t_table *table)
 		}
 		if (j == table->philo_count)
 		{
-			// only for testing
-			pthread_mutex_lock(&table->write_lock);
-			printf("%ld All philosophers have eaten at least %d times\n",
-				get_timestamp(table), table->must_eat_count);
-			pthread_mutex_unlock(&table->write_lock);
 			return (-1);
 		}
 	}
