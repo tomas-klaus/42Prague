@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 10:21:47 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/09/15 19:56:47 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/09/23 10:15:06 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void				assign_forks(int *first, int *second, t_table *table,
 // exit
 int					msg(char *str, int exit_no);
 void				cleanup(t_table *table);
+void				unlock_forks(t_table *table, int id);
+int					think_routine(t_table *table, int id);
 
 // time
 time_t				get_time(void);

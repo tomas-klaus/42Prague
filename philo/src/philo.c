@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:02:26 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/09/15 19:58:46 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/09/23 10:15:02 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ void	loop(t_table *table, int id)
 			break ;
 		fork_routine(table, id);
 		if (quick_check(table, id))
+		{
+			unlock_forks(table, id);
 			break ;
+		}
 		if (eat_routine(table, id))
 			break ;
 		if (quick_check(table, id))
@@ -83,9 +86,8 @@ void	loop(t_table *table, int id)
 			break ;
 		if (quick_check(table, id))
 			break ;
-		pthread_mutex_lock(&table->write_lock);
-		printf("%ld %d is thinking\n", get_timestamp(table), id + 1);
-		pthread_mutex_unlock(&table->write_lock);
+		if (think_routine(table, id))
+			break ;
 	}
 }
 

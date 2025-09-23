@@ -3,19 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tklaus <tklaus@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tomasklaus <tomasklaus@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 19:05:25 by tomasklaus        #+#    #+#             */
-/*   Updated: 2025/09/15 19:58:00 by tklaus           ###   ########.fr       */
+/*   Updated: 2025/09/23 10:15:04 by tomasklaus       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/header.h"
 
-/* msg:
- *	Writes a message to the console. Returns the provided exit number.
- *	Used for error management.
- */
+void	unlock_forks(t_table *table, int id)
+{
+	int	first;
+	int	second;
+
+	assign_forks(&first, &second, table, id);
+	table->fork[second] = -1;
+	pthread_mutex_unlock(&table->fork_mutex[second]);
+	table->fork[first] = -1;
+	pthread_mutex_unlock(&table->fork_mutex[first]);
+}
+
 int	msg(char *str, int exit_no)
 {
 	printf("%s", str);
@@ -36,6 +44,32 @@ void	dest_mutex(t_table *table)
 			i++;
 		}
 	}
+}
+
+/* Calculate the time remaining until the philosopher
+would die and sleep for that amount of time */
+int	think_routine(t_table *table, int id)
+{
+	time_t	now;
+	time_t	last_meal;
+	time_t	time_since_last_meal;
+	time_t	time_remaining;
+
+	pthread_mutex_lock(&table->write_lock);
+	printf("%ld %d is thinking\n", get_timestamp(table), id + 1);
+	pthread_mutex_unlock(&table->write_lock);
+	now = get_time();
+	pthread_mutex_lock(&table->philos[id].last_meal_mutex);
+	last_meal = table->philos[id].last_meal;
+	pthread_mutex_unlock(&table->philos[id].last_meal_mutex);
+	time_since_last_meal = now - last_meal;
+	time_remaining = table->die_time - time_since_last_meal;
+	if (time_remaining > 0)
+	{
+		if (philo_sleep(table, (time_remaining - 10), id))
+			return (1);
+	}
+	return (0);
 }
 
 void	cleanup(t_table *table)
